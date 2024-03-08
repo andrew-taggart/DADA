@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const GoalRegistrationForm = ({ onGoalRegister }) => {
+const GoalForm = ({ onGoalRegister }) => {
   const [goalName, setGoalName] = useState('')
   const [description, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
@@ -95,4 +95,4 @@ const GoalRegistrationForm = ({ onGoalRegister }) => {
   )
 }
 
-export default GoalRegistrationForm
+export default GoalForm
