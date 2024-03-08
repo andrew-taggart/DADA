@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 
-const GoalForm = ({ onGoalRegister }) => {
+// const GoalForm = ({ onGoalRegister }) => {
+const GoalForm = () => {
+  const [Goals,setGoals] = useState([])
   const [goalName, setGoalName] = useState('')
   const [description, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
@@ -26,8 +28,10 @@ const GoalForm = ({ onGoalRegister }) => {
       reminder
     }
 
+    setGoals(newGoal)
+
     // Callback function to pass the new goal up to the parent component
-    onGoalRegister(newGoal)
+    // onGoalRegister(newGoal)
 
     // Clear form fields
     setGoalName('')
@@ -37,6 +41,7 @@ const GoalForm = ({ onGoalRegister }) => {
     setReminder(false)
   }
 
+  console.log(Goals)
   return (
     <div className="goal-registration-container">
       <form onSubmit={handleSubmit}>
@@ -89,7 +94,9 @@ const GoalForm = ({ onGoalRegister }) => {
             onChange={handleReminderChange}
           />
         </div>
-        <button type="submit" className="btn-register-goal">Register Goal</button>
+        <button type="submit" className="btn-new-register-goal">Register Goal</button>
+        <button type="submit" className="btn-edit-register-goal">Modify Goal</button>
+        <button type="submit" className="btn-discard-register-goal">Discard Goal</button>
       </form>
     </div>
   )

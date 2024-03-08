@@ -4,7 +4,7 @@ import Goals from './GoalPage'
 import SignIn from './SignIn'
 import {Routes, Route} from 'react-router-dom'
 
-const Footer = () => {
+const Main = () => {
     return (
         <div className='home-container'>
          <Routes>
@@ -17,4 +17,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default Main
