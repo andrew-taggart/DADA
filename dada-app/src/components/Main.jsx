@@ -1,11 +1,20 @@
-import { useState } from 'react'
-import Goals from './components/GoalPage'
-import Home from './components/Main'
-import GoalForm from './components/GoalPage'
+import GoalForm from './SetGoal'
+import Home from './Home'
+import Goals from './GoalPage'
+import SignIn from './SignIn'
+import {Routes, Route} from 'react-router-dom'
 
-<Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/goals" element={<Goals />} />
-    <Route path="/register" element={<SiginIn />} />
-    <Route path="/setgoal" element={<GoalForm />} />
-</Routes>
+const Footer = () => {
+    return (
+        <div className='home-container'>
+         <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/goals" element={<Goals />} />
+            <Route path="/register" element={<SignIn />} />
+            <Route path="/setgoal" element={<GoalForm />} />
+        </Routes>
+        </div>
+    )
+}
+
+export default Footer

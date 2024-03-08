@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 
-const SignInPage = () => {
-    const history = useHistory();
+const SignIn = () => {
+    // const history = useHistory();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
   
@@ -51,4 +51,4 @@ const SignInPage = () => {
     );
   };
   
-  export default SignInPage
+  export default SignIn
