@@ -1,7 +1,7 @@
 # DADA
 
-##About
-This full-stack (Mongoose/Express/React/Node) application designed to help users set, track, and achieve their personal and professional goals. With a user-friendly interface and a wide range of customizable features, that will make it easy for users to stay motivated and focused on their path to success.
+## About
+This full-stack MERN (Mongoose/Express/React/Node) application is designed to help users set, track, and achieve their personal and professional goals. With a user-friendly interface and a wide range of customizable features, that will make it easy for users to stay motivated and focused on their path to success.
 
 ## Key Features
 
