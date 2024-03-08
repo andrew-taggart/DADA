@@ -9,7 +9,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="AppContainer">
+    <div className="App">
       <Header />
       <Main />
       <Footer />

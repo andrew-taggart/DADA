@@ -1,7 +1,9 @@
+import home from '../assets/home.png'
+
 const Home = () => {
     return (
-        <div className='home-container'>
-         <h1>Home</h1>
+        <div className='home'>
+            <div><img src ={home}></img></div>
         </div>
     )
 }
