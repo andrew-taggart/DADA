@@ -11,12 +11,15 @@ const  GoalContextProvide = (props) => {
     ])
 
     const addNewGoal = ( goalName, startDate,endDate, accomplished,reminder,note) => {
-        setGoals({goalName,startDate,endDate, accomplished,reminder,note})
+        setGoals(prevGoals => [
+            ...prevGoals,
+            { goalName, startDate, endDate, accomplished, reminder, note }
+        ])
     }
 
     return (
         //  {/* //Passing the values of goals to its childrens (SetupGoals) */}
-        <GoalContext.Provider value={{goals}}>           
+        <GoalContext.Provider value={{goals,addNewGoal}}>           
             {props.children}
         </GoalContext.Provider>
     )

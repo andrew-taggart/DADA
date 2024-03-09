@@ -1,15 +1,16 @@
 import { useState, useContext } from 'react'
 import { GoalContext } from '../context/GoalContext'
+import Milestone from './Milestone'
 
 
 // const GoalForm = ({ onGoalRegister }) => {
 const GoalForm = () => {
 
-  const {goalContext}= useContext(GoalContext)
+  const { goals, addNewGoal } = useContext(GoalContext)
 
-  const [goals, setGoals] = useState([])
+  //const [goals, setGoals] = useState()
   const [goalName, setGoalName] = useState('')
-  const [description, setDescription] = useState('')
+  const [note, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [reminder, setReminder] = useState(false)
@@ -70,32 +71,43 @@ const GoalForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Perform form validation here
-
-    // Create goal object
-    const newGoal = {
-      goalName,
-      description,
-      startDate,
-      endDate,
-      reminder,
-      accomplish
+    
+    if (!goalName || !startDate || !endDate) {
+      setAlertMessage('Please fill in all required fields.');
+      return; // Exit the function if validation fails
     }
 
-    setGoals(newGoal)
+    // // Create goal object
+    // const newGoal = {
+    //   goalName,
+    //   description,
+    //   startDate,
+    //   endDate,
+    //   reminder,
+    //   accomplish
+    // }
 
-    // Callback function to pass the new goal up to the parent component
-    // onGoalRegister(newGoal)
+    // setGoals(newGoal)
+
+    addNewGoal(goalName, startDate, endDate, accomplish, reminder, note)
 
     // Clear form fields
+   handelClearForm()
+
+    setAlertMessage('Goal successfully registered!')
+
+  }
+
+  const handelClearForm = () => {
+
     setGoalName('')
     setDescription('')
     setStartDate('')
     setEndDate('')
     setReminder(false)
     setAccomplish(false)
-  }
 
+  }
   console.log(goals)
   return (
     <div className="goal-registration-container">
@@ -115,8 +127,8 @@ const GoalForm = () => {
         <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
-            id="description"
-            value={description}
+            id="note"
+            value={note}
             onChange={handleDescriptionChange}
             placeholder='Enter any special notes'
           />
@@ -177,13 +189,16 @@ const GoalForm = () => {
       {/* <option value="Goal 2"></option> */}
       {/* Add more options based on your data */}
     </datalist>
-   
+   <div className='milestone'>
+        <Milestone/>
+   </div>
   </div>
         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
         <div className='buttons'>
-          <button type="submit" className="btn-new-register-goal">Register Goal</button>
-          <button type="submit" className="btn-edit-register-goal">Modify Goal</button>
-          <button type="submit" className="btn-discard-register-goal">Discard Goal</button>
+        <button type="button" className="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
+          <button type="submit" className="btn-new-register-goal">Register</button>
+          <button type="button" className="btn-edit-register-goal">Modify</button>
+          <button type="button" className="btn-discard-register-goal">Discard</button>
         </div>
       </form>
     </div>
