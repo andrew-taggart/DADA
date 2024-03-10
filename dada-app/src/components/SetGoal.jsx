@@ -18,7 +18,7 @@ const GoalForm = () => {
 
   const [alertMessage, setAlertMessage] = useState('')
 
-  const handleGoalNameChange = (e) =>{
+  const handleGoalNameChange = (e) => {
 
     const value = e.target.value;
 
@@ -34,8 +34,8 @@ const GoalForm = () => {
       setAlertMessage('')
       setGoalName(value)
     }
-    }
-     
+  }
+
   const handleDescriptionChange = (e) => setDescription(e.target.value)
 
 
@@ -47,21 +47,21 @@ const GoalForm = () => {
 
     if (startDate >= currentDate) {
       setStartDate(e.target.value)
-      setAlertMessage('') 
+      setAlertMessage('')
     } else {
       setAlertMessage('Start date cannot be in the past !')
     }
-    
+
   }
   const handleEndDateChange = (e) => {
     const endDate = new Date(e.target.value)
     const inStartDate = new Date(startDate);
-    
+
 
     if (endDate >= inStartDate) {
       setEndDate(e.target.value)
-      setAlertMessage('') 
-    }else {
+      setAlertMessage('')
+    } else {
       setAlertMessage('End date cannot be before the start date !')
     }
 
@@ -71,7 +71,7 @@ const GoalForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+
     if (!goalName || !startDate || !endDate) {
       setAlertMessage('Please fill in all required fields.');
       return; // Exit the function if validation fails
@@ -92,7 +92,7 @@ const GoalForm = () => {
     addNewGoal(goalName, startDate, endDate, accomplish, reminder, note)
 
     // Clear form fields
-   handelClearForm()
+    handelClearForm()
 
     setAlertMessage('Goal successfully registered!')
 
@@ -172,30 +172,30 @@ const GoalForm = () => {
           />
         </div>
         <div className="form-group">
-    <label htmlFor="goalName">Goal Name:</label>
-    <input
-      list="goalsList"
-      type="text"
-      id="goalName"
-      value={goalName}
-      onChange={handleGoalNameChange}
-      required
-      placeholder="Enter or select the Goal name"
-    />
-     <datalist id="goalsList">
-      {/* Dynamically list options here */}
-      {/* Example: */}
-      {/* <option value="Goal 1"></option> */}
-      {/* <option value="Goal 2"></option> */}
-      {/* Add more options based on your data */}
-    </datalist>
-   <div className='milestone'>
-        <Milestone/>
-   </div>
-  </div>
+          <label htmlFor="goalName">Goal Name:</label>
+          <input
+            list="goalsList"
+            type="text"
+            id="goalName"
+            value={goalName}
+            onChange={handleGoalNameChange}
+            required
+            placeholder="Enter or select the Goal name"
+          />
+          <datalist id="goalsList">
+            {/* Dynamically list options here */}
+            {/* Example: */}
+            {/* <option value="Goal 1"></option> */}
+            {/* <option value="Goal 2"></option> */}
+            {/* Add more options based on your data */}
+          </datalist>
+          <div className='milestone'>
+            <Milestone />
+          </div>
+        </div>
         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
         <div className='buttons'>
-        <button type="button" className="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
+          <button type="button" className="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
           <button type="submit" className="btn-new-register-goal">Register</button>
           <button type="button" className="btn-edit-register-goal">Modify</button>
           <button type="button" className="btn-discard-register-goal">Discard</button>
