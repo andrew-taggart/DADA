@@ -5,7 +5,7 @@ import SignIn from './SignIn'
 import Register from './Register'
 import {Routes, Route} from 'react-router-dom'
 
-const Footer = () => {
+const Main = () => {
     return (
         <div className='main-container'>
          <Routes>
@@ -19,4 +19,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default Main
