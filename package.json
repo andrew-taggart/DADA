@@ -1,0 +1,15 @@
+{
+  "name": "dada",
+  "version": "1.0.0",
+  "description": "##About This full-stack (Mongoose/Express/React/Node) application designed to help users set, track, and achieve their personal and professional goals. With a user-friendly interface and a wide range of customizable features, that will make it easy for users to stay motivated and focused on their path to success.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}

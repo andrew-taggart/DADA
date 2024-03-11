@@ -1,51 +1,120 @@
-import { useState,useContext } from 'react'
+import { useState, useContext } from 'react'
+import { GoalContext } from '../context/GoalContext'
+import Milestone from './Milestone'
+import '../components/setGoal.css'
+
 
 // const GoalForm = ({ onGoalRegister }) => {
 const GoalForm = () => {
-  const [Goals,setGoals] = useState([])
+
+  const { goals, addNewGoal } = useContext(GoalContext)
+
+  //const [goals, setGoals] = useState()
   const [goalName, setGoalName] = useState('')
-  const [description, setDescription] = useState('')
+  const [note, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [reminder, setReminder] = useState(false)
+  const [accomplish, setAccomplish] = useState(false)
 
-  const handleGoalNameChange = (e) => setGoalName(e.target.value)
+  const [alertMessage, setAlertMessage] = useState('')
+
+  const handleGoalNameChange = (e) => {
+
+    const value = e.target.value
+
+    if (!value) {
+      // Update the alert message state instead of using alert
+      setAlertMessage('The goal name cannot be empty !')
+    }
+    // Assuming goal names are textual and checking if the input is purely numeric
+    else if (!isNaN(parseFloat(value)) && isFinite(value)) {
+      setAlertMessage('The goal name must not be a number !')
+    } else {
+      // Clear any existing alert message and set the goal name
+      setAlertMessage('')
+      setGoalName(value)
+    }
+  }
+
   const handleDescriptionChange = (e) => setDescription(e.target.value)
-  const handleStartDateChange = (e) => setStartDate(e.target.value)
-  const handleEndDateChange = (e) => setEndDate(e.target.value)
+
+
+
+  const handleStartDateChange = (e) => {
+    const startDate = new Date(e.target.value)
+    const currentDate = new Date()
+    currentDate.setHours(0, 0, 0, 0)
+
+    if (startDate >= currentDate) {
+      setStartDate(e.target.value)
+      setAlertMessage('')
+    } else {
+      setAlertMessage('Start date cannot be in the past !')
+    }
+
+  }
+  const handleEndDateChange = (e) => {
+    const endDate = new Date(e.target.value)
+    const inStartDate = new Date(startDate)
+
+
+    if (endDate >= inStartDate) {
+      setEndDate(e.target.value)
+      setAlertMessage('')
+    } else {
+      setAlertMessage('End date cannot be before the start date !')
+    }
+
+  }
   const handleReminderChange = (e) => setReminder(e.target.checked)
+  const handleAccomplishChange = (e) => setAccomplish(e.target.checked)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Perform form validation here
 
-    // Create goal object
-    const newGoal = {
-      goalName,
-      description,
-      startDate,
-      endDate,
-      reminder
+    if (!goalName || !startDate || !endDate) {
+      setAlertMessage('Please fill in all required fields.')
+      return // Exit the function if validation fails
     }
 
-    setGoals(newGoal)
+    // // Create goal object
+    // const newGoal = {
+    //   goalName,
+    //   description,
+    //   startDate,
+    //   endDate,
+    //   reminder,
+    //   accomplish
+    // }
 
-    // Callback function to pass the new goal up to the parent component
-    // onGoalRegister(newGoal)
+    // setGoals(newGoal)
+
+    addNewGoal(goalName, startDate, endDate, accomplish, reminder, note)
 
     // Clear form fields
+    handelClearForm()
+
+    setAlertMessage('Goal successfully registered!')
+
+  }
+
+  const handelClearForm = () => {
+
     setGoalName('')
     setDescription('')
     setStartDate('')
     setEndDate('')
     setReminder(false)
-  }
+    setAccomplish(false)
 
-  console.log(Goals)
+  }
+  console.log(goals)
   return (
     <div className="goal-registration-container">
       <form onSubmit={handleSubmit}>
-        <h2>Register New Goal</h2>
+        <div className='goal-title'><h2>Register New Goal</h2></div>
+        
         <div className="form-group">
           <label htmlFor="goalName">Goal Name:</label>
           <input
@@ -54,17 +123,20 @@ const GoalForm = () => {
             value={goalName}
             onChange={handleGoalNameChange}
             required
+            placeholder='Enter the Goal name'
           />
         </div>
         <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
-            id="description"
-            value={description}
+            id="note"
+            value={note}
             onChange={handleDescriptionChange}
-            required
+            placeholder='Enter any special notes'
           />
         </div>
+        <div className='dates'>
+        <br></br>
         <div className="form-group">
           <label htmlFor="startDate">Start Date:</label>
           <input
@@ -85,8 +157,12 @@ const GoalForm = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="reminder">Set Reminder:</label>
+        </div>
+        
+        
+       <div className='checked-box'>
+       <div className="form-group">
+          <label htmlFor="reminder">Reminder:</label>
           <input
             type="checkbox"
             id="reminder"
@@ -94,9 +170,45 @@ const GoalForm = () => {
             onChange={handleReminderChange}
           />
         </div>
-        <button type="submit" className="btn-new-register-goal">Register Goal</button>
-        <button type="submit" className="btn-edit-register-goal">Modify Goal</button>
-        <button type="submit" className="btn-discard-register-goal">Discard Goal</button>
+        <div className="form-group">
+          <label htmlFor="Accomplished">Accomplished :</label>
+          <input
+            type="checkbox"
+            id="isAccomplished"
+            checked={accomplish}
+            onChange={handleAccomplishChange}
+          />
+        </div>
+       </div>
+        <div className="form-group">
+          <label htmlFor="goalName">Goal Name:</label>
+          <input
+            list="goalsList"
+            type="text"
+            id="goalName"
+            value={goalName}
+            onChange={handleGoalNameChange}
+            required
+            placeholder="Enter or select the Goal name"
+          />
+          <datalist id="goalsList">
+            {/* Dynamically list options here */}
+            {/* Example: */}
+            {/* <option value="Goal 1"></option> */}
+            {/* <option value="Goal 2"></option> */}
+            {/* Add more options based on your data */}
+          </datalist>
+          <div className='milestone'>
+            <Milestone />
+          </div>
+        </div>
+        {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
+        <div className='buttons'>
+          <button type="button" className="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
+          <button type="submit" className="btn-new-register-goal">Register</button>
+          <button type="button" className="btn-edit-register-goal">Modify</button>
+          <button type="button" className="btn-discard-register-goal">Discard</button>
+        </div>
       </form>
     </div>
   )
