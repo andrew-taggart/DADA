@@ -4,7 +4,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 const main = async () => {
     listGoals = [
         {
-            user: 'validUserIdHere', // Replace 'validUserIdHere' with an actual user ID from your user collection
+            user: '65ef2b370ba628b5c1cd87d4', 
             goalName: 'Finish Project',
             startDate: new Date(2024, 2, 8),
             endDate: new Date(2024, 2, 15),
@@ -13,7 +13,7 @@ const main = async () => {
             notes: '#1 group'
         },
         {
-            user: 'validUserIdHere', // Replace 'validUserIdHere' with an actual user ID from your user collection
+            user: '65ef2b370ba628b5c1cd87d5', 
             goalName: 'Present Project',
             startDate: new Date(2024, 2, 8),
             endDate: new Date(2024, 2, 15),

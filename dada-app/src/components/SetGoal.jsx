@@ -1,7 +1,8 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { GoalContext } from '../context/GoalContext'
 import Milestone from './Milestone'
 import '../components/setGoal.css'
+import axios from 'axios'
 
 
 // const GoalForm = ({ onGoalRegister }) => {
@@ -9,7 +10,7 @@ const GoalForm = () => {
 
   const { goals, addNewGoal } = useContext(GoalContext)
 
-  //const [goals, setGoals] = useState()
+  const [goalList, setGoalList] = useState('')
   const [goalName, setGoalName] = useState('')
   const [note, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
@@ -18,6 +19,27 @@ const GoalForm = () => {
   const [accomplish, setAccomplish] = useState(false)
 
   const [alertMessage, setAlertMessage] = useState('')
+
+//   useEffect(() => {
+
+    
+//   const loadAllGoals = async () => {
+
+//     try{
+//         const responseGoal = await axios.get('http://localhost:3001/goals')
+//         console.log(responseGoal.data)
+//         setGoalList(responseGoal.data)
+
+//       }catch(error){
+//         console.error("Error loading goals:", error)
+//         setAlertMessage("Error loading goals: ", error.message)
+//       }
+
+// }
+// loadAllGoals()
+
+//   },[])
+
 
   const handleGoalNameChange = (e) => {
 
@@ -92,6 +114,7 @@ const GoalForm = () => {
 
     addNewGoal(goalName, startDate, endDate, accomplish, reminder, note)
 
+  
     // Clear form fields
     handelClearForm()
 
@@ -192,11 +215,11 @@ const GoalForm = () => {
             placeholder="Enter or select the Goal name"
           />
           <datalist id="goalsList">
-            {/* Dynamically list options here */}
-            {/* Example: */}
-            {/* <option value="Goal 1"></option> */}
-            {/* <option value="Goal 2"></option> */}
-            {/* Add more options based on your data */}
+           {/* {
+              goalList.map((goal,index) => (
+                <option key={goal.id}  value={goal.goalName} />
+              ))
+           } */}
           </datalist>
           <div className='milestone'>
             <Milestone />

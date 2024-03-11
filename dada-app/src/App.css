@@ -45,6 +45,7 @@ h1 {
   color: rgb(104, 103, 103);
 }
 
+
 /* Footer */
 
 .footer-container {
@@ -91,14 +92,31 @@ h1 {
   align-items: center;
 }
 
-/* Home */
+/* Main */
 
-.home div {
-  overflow: hidden;
+.main-container {
+  background-image: url("src/assets/home.png");
+  background-color: white;
+  background-position: bottom right;
+  background-position-x: 85%;
+  background-size: cover;
+  height: 550px;
+  width: 400px;
+  margin-top: 93px;
 }
 
-.home img{
-  height: 610px;
-  transform: translateY(80px) translateX(-630px);
-  object-fit: contain;
+
+/* Calendar */
+.calendar-container{
+  background-color:white;
+  width: 380px;
+  height: 525px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
 }
+
+
+
+
