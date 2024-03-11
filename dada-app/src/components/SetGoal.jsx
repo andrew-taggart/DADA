@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 import { GoalContext } from '../context/GoalContext'
 import Milestone from './Milestone'
+import '../components/setGoal.css'
 
 
 // const GoalForm = ({ onGoalRegister }) => {
@@ -20,7 +21,7 @@ const GoalForm = () => {
 
   const handleGoalNameChange = (e) => {
 
-    const value = e.target.value;
+    const value = e.target.value
 
     if (!value) {
       // Update the alert message state instead of using alert
@@ -55,7 +56,7 @@ const GoalForm = () => {
   }
   const handleEndDateChange = (e) => {
     const endDate = new Date(e.target.value)
-    const inStartDate = new Date(startDate);
+    const inStartDate = new Date(startDate)
 
 
     if (endDate >= inStartDate) {
@@ -73,8 +74,8 @@ const GoalForm = () => {
     e.preventDefault()
 
     if (!goalName || !startDate || !endDate) {
-      setAlertMessage('Please fill in all required fields.');
-      return; // Exit the function if validation fails
+      setAlertMessage('Please fill in all required fields.')
+      return // Exit the function if validation fails
     }
 
     // // Create goal object
@@ -112,7 +113,8 @@ const GoalForm = () => {
   return (
     <div className="goal-registration-container">
       <form onSubmit={handleSubmit}>
-        <h2>Register New Goal</h2>
+        <div className='goal-title'><h2>Register New Goal</h2></div>
+        
         <div className="form-group">
           <label htmlFor="goalName">Goal Name:</label>
           <input
@@ -133,6 +135,8 @@ const GoalForm = () => {
             placeholder='Enter any special notes'
           />
         </div>
+        <div className='dates'>
+        <br></br>
         <div className="form-group">
           <label htmlFor="startDate">Start Date:</label>
           <input
@@ -153,8 +157,12 @@ const GoalForm = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="reminder">Set Reminder:</label>
+        </div>
+        
+        
+       <div className='checked-box'>
+       <div className="form-group">
+          <label htmlFor="reminder">Reminder:</label>
           <input
             type="checkbox"
             id="reminder"
@@ -171,6 +179,7 @@ const GoalForm = () => {
             onChange={handleAccomplishChange}
           />
         </div>
+       </div>
         <div className="form-group">
           <label htmlFor="goalName">Goal Name:</label>
           <input

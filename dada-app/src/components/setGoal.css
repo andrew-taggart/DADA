@@ -1,0 +1,54 @@
+.goal-registration-container{
+
+    background-color: rgb(232, 221, 221);
+    border:2px silid;
+    border-radius: 15px;
+
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 95%;
+    margin: 12px;
+    text-align: center;
+}
+
+.goal-title{
+    border: 2px solid rgb(102, 88, 69);
+    background-color: rgb(232, 193, 140);
+    border-radius: 15px;
+    height: 50px;
+    text-align: center;
+    
+}
+#goalName,#note{
+    width: 75%;
+    margin-bottom: 5px;
+}
+
+.dates{
+    display: flex;
+    flex-direction: row;
+   
+
+}
+.dates input{
+    width: 50%;
+}
+
+#startDate, #endDate{
+    width: 150px;
+    height: 25px;
+}
+
+.checked-box{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.checked-box input{
+/* width: 40%; */
+margin: 15px 35px;
+}
