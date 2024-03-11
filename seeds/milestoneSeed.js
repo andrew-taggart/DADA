@@ -2,12 +2,9 @@ const db = require('../db')
 const { Goal, User, Milestone } = require('../models')
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 const main = async () => {
-    const userId = await User.find({ type: 'admin' })
-    const goalId = await User.find({ type: 'admin' })
     listMilestones = [
         {
-            userID: userId[0]._id,
-            goalID: goalId[0]._id,
+            goal: '65ef2d0ba2214f93bcd3576f',
             taskName: 'styling',
             dueDate : new Date(2024, 2, 9),
             accomplished: true,
@@ -15,8 +12,7 @@ const main = async () => {
             description: 'Making it pretty'
         },
         {
-            userID: userId[0]._id,
-            goalID: goalId[0]._id,
+            goal: '65ef2d0ba2214f93bcd3576e',
             taskName: 'backend',
             dueDate : new Date(2024, 2, 9),
             accomplished: false,
