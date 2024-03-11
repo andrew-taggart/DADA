@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import { GoalContext } from '../context/GoalContext'
 import Milestone from './Milestone'
-import '../components/setGoal.css'
 import axios from 'axios'
 
 
@@ -221,6 +220,7 @@ const GoalForm = () => {
               ))
            } */}
           </datalist>
+          
           <div className='milestone'>
             <Milestone />
           </div>
@@ -231,7 +231,7 @@ const GoalForm = () => {
           <button type="submit" className="btn-new-register-goal">Register</button>
           <button type="button" className="btn-edit-register-goal">Modify</button>
           <button type="button" className="btn-discard-register-goal">Discard</button>
-        </div>
+        </div> 
       </form>
     </div>
   )

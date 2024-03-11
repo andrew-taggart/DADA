@@ -7,6 +7,14 @@
   font-family: "KoHo", sans-serif;
   font-weight: 500;
   font-style: normal;
+  background-image: url("src/assets/home.png");
+  background-color: white;
+  background-position: bottom right;
+  background-position-x: 85%;
+  background-size: cover;
+  height: 550px;
+  width: 400px;
+  margin-top: 93px;
 }
 
 /* Header */
@@ -94,7 +102,7 @@ h1 {
 
 /* Main */
 
-.main-container {
+/* .main-container {
   background-image: url("src/assets/home.png");
   background-color: white;
   background-position: bottom right;
@@ -103,7 +111,7 @@ h1 {
   height: 550px;
   width: 400px;
   margin-top: 93px;
-}
+} */
 
 
 /* Calendar */
@@ -116,6 +124,8 @@ h1 {
   justify-content: center;
   margin-left: 5px;
 }
+
+
 
 
 

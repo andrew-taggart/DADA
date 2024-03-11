@@ -15,7 +15,7 @@ function App() {
       <GoalContextProvide>
       <Header />
       <Main />
-      <Footer />
+      {/* <Footer /> */}
       </GoalContextProvide>
     </div>
   )
