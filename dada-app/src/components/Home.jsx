@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import home from '../assets/home.png'
+import SignIn from './SignIn'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -17,10 +17,10 @@ const Home = () => {
     return (
 
         <div className="home">
-            <h1>Welcome Home!</h1>
+            <SignIn />
+            <div><h5>(api call for motivation quotes)</h5>
             <p>You have successfully signed in. Enjoy your stay.</p>
-            <button onClick={handleSignOut} className="btn-signout">Sign Out</button>
-        <div><img src ={home}></img></div>
+            <button onClick={handleSignOut} className="btn-signout">Sign Out</button></div>
         </div>
     );
 };
