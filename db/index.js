@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose
-//replace connection with Mongo Atlas
-    .connect('mongodb://127.0.0.1:27017/dadaDatabase')
+    //.connect('mongodb://127.0.0.1:27017/dadaDatabase')
+    .connect('mongodb+srv://toddlf705:uAxo9qcPmdVyFujQ@cluster0.acpuqv8.mongodb.net/dada-user?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => {
         console.log('Successfully connected to MongoDB.')
     })
