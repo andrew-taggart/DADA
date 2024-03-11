@@ -45,6 +45,7 @@ h1 {
   color: rgb(104, 103, 103);
 }
 
+
 /* Footer */
 
 .footer-container {
@@ -91,14 +92,17 @@ h1 {
   align-items: center;
 }
 
-/* Home */
+/* Main */
 
-.home div {
-  overflow: hidden;
+.main-container {
+  background-image: url("src/assets/home.png");
 }
 
-.home img{
+/* .main-container img{
   height: 610px;
   transform: translateY(80px) translateX(-630px);
   object-fit: contain;
-}
+} */
+
+
+

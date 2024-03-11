@@ -7,7 +7,7 @@ import {Routes, Route} from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <div className='home-container'>
+        <div className='main-container'>
          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/goals" element={<Goals />} />
