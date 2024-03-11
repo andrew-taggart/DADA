@@ -1,14 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
+import axios from 'axios'
 export const GoalContext = React.createContext()
  
 
 //Provider function
 const  GoalContextProvide = (props) => {
 
-    //Initilizing goals via context 
+    // Initilizing goals via context 
     const [goals,setGoals] = useState([
-        { goalName: 'Learn React', startDate: '2024-03-09', endDate: '2024-03-23', accomplished:false ,reminder: false ,note: 'Testing'}
+        // { goalName: 'Learn React', startDate: '2024-03-09', endDate: '2024-03-23', accomplished:false ,reminder: false ,note: 'Testing'}
     ])
+
+    // useEffect(() => {
+    //     const loadAllGoals = async () => {
+    //         try {
+    //             const response = await axios.get('http://localhost:3001/goals')
+    //             setGoals(response.data); // Assuming the backend returns an array of goals
+    //         } catch (error) {
+    //             console.error("Error loading goals:", error)
+    //             // Optionally, you could handle this error more gracefully
+    //         }
+    //     };
+
+    //     loadAllGoals()
+    // }, [])
 
     const addNewGoal = ( goalName, startDate,endDate, accomplished,reminder,note) => {
         setGoals(prevGoals => [
