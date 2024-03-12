@@ -50,7 +50,7 @@ const updateUser = async (req, res) => {
         let { id } = req.params;
         let user = await User.findByIdAndUpdate(id, req.body, { new: true })
         if (user) {
-            return res.status(200).json(tv)
+            return res.status(200).json(user)
         }
         throw new Error("User not found")
     } catch (error) {
@@ -60,7 +60,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const deleted = await TV.findByIdAndDelete(id)
+        const deleted = await User.findByIdAndDelete(id)
         if (deleted) {
             return res.status(200).send("user deleted")
         }
