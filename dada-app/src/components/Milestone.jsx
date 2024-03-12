@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react'
 
-// import { useAsyncError } from 'react-router-dom'
 
-// ({ onAddMilestone, goalId })
 export default function Milestone({onAddMilestone}) {
 
    
@@ -26,6 +24,7 @@ export default function Milestone({onAddMilestone}) {
 
     const handelSubmit = (e) => {
         e.preventDefault()
+        try{
         if (!taskName || !dueDate) {
             setAlertMessage('Task name and due date are required.')
             return
@@ -46,7 +45,9 @@ export default function Milestone({onAddMilestone}) {
         setAccomplished(false)
         setActiveReminder(false)
         setDescription('')
-
+        }catch(error){
+            setAlertMessage('Unable to add milestone.',error.message)
+        }
 
     }
 
@@ -71,7 +72,7 @@ export default function Milestone({onAddMilestone}) {
                                 value={taskName}
                                 onChange={handleTaskNameChange}
                                 placeholder='Enter the Task name'
-                                required
+                                
                             /><br />
                         </div>
                         <div className='form-group'>
@@ -90,7 +91,7 @@ export default function Milestone({onAddMilestone}) {
                                 id="dueDate"
                                 value={dueDate}
                                 onChange={handleDueDateChange}
-                                required                          
+                                                          
                             />
                         </div>
                         <div className="form-group">
@@ -143,9 +144,7 @@ export default function Milestone({onAddMilestone}) {
                            </tbody>
 
                         </table>
-                        {/* <div className="form-group">
-                            <button className='edit' type='button'>EDIT</button><button className='delete' type="button">DELETE</button>
-                        </div> */}
+                        {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
                     </div>
 
                 {/* </form> */}

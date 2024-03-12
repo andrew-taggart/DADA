@@ -29,7 +29,9 @@ const GoalForm = () => {
   const loadCurrentUser = async () => {
     let userId='65ef2b370ba628b5c1cd87d7'
     try{
-        //const responseUser = await axios.get(`http://localhost:3001/users/${userId}`)
+      // const test = await axios.get("http://localhost:3001/goals")
+      // console.log(" Find id",test.data[0]._id)
+       
         // http://localhost:3001/users/65ef2b370ba628b5c1cd87d7
         //console.log("UserID",responseUser.data)
         setUser(userId)
@@ -105,9 +107,14 @@ loadCurrentUser()
 try{
     if (!goalName || !startDate || !endDate) {
       setAlertMessage('Please fill in all required fields.')
-      return // Exit the function if validation fails
+      return 
     }
-    console.log('Adding milestone inn to gole --',milestones)
+
+    if(!milestones){
+      setAlertMessage('Please fill in all milestone(s).')
+      return 
+    }
+    
     //addNewGoal(user,goalName, startDate, endDate, accomplished, isActive, notes)
     addNewGoal(user,goalName, startDate, endDate, accomplished, isActive, notes, milestones)
 
