@@ -17,7 +17,6 @@ const Home = () => {
     return (
 
         <div className="home">
-            <SignIn />
             <div><h5>(api call for motivation quotes)</h5>
             <p>You have successfully signed in. Enjoy your stay.</p>
             <button onClick={handleSignOut} className="btn-signout">Sign Out</button></div>

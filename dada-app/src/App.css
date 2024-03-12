@@ -4,17 +4,10 @@
 
 
 .App {
-  font-family: "KoHo", sans-serif;
-  font-weight: 500;
+  font-family: 'Inter';
   font-style: normal;
-  background-image: url("src/assets/home.png");
-  background-color: white;
-  background-position: bottom right;
-  background-position-x: 85%;
-  background-size: cover;
-  height: 550px;
-  width: 400px;
-  margin-top: 93px;
+  font-weight: 300;
+  background-color: #FEF6F1;
 }
 
 /* Header */
@@ -51,6 +44,75 @@ h1 {
 
 .nav-container a {
   color: rgb(104, 103, 103);
+}
+
+/* Sign in */
+.signin-container {
+  background-image: url("src/assets/home.png");
+  background-color: #FEF6F1;
+  background-position: bottom right;
+  background-position-x: 85%;
+  background-size: cover;
+  height: 550px;
+  width: 390px;
+  margin-top: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.signin-background {
+  width: 360px;
+  height: 300px;
+  background-color: rgb(203, 203, 203, .8);
+  border-radius: 15px;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.username-pw{
+  margin: auto;
+  width: 300px;
+  margin-top: 25px;
+}
+
+#username{
+  width: 180px;
+  height: 30px;
+}
+
+#password{
+  width: 180px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-signin {
+  width: 150px;
+  height: 35px;
+  margin-top: 20px;
+  background-color: rgb(255, 255, 255, 0.8);
+}
+
+.btn-signin:hover {
+  background-color: #C4BAC9;
+}
+
+.register-link {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+/* Home */
+.home {
+  background-image: url("src/assets/home.png");
+  background-color: #FEF6F1;
+  background-position: bottom right;
+  background-position-x: 85%;
+  background-size: cover;
+  height: 535px;
+  width: 390px;
+  margin-top: 70px;
 }
 
 
@@ -100,19 +162,6 @@ h1 {
   align-items: center;
 }
 
-/* Main */
-
-/* .main-container {
-  background-image: url("src/assets/home.png");
-  background-color: white;
-  background-position: bottom right;
-  background-position-x: 85%;
-  background-size: cover;
-  height: 550px;
-  width: 400px;
-  margin-top: 93px;
-} */
-
 
 /* Calendar */
 .calendar-container{
@@ -125,7 +174,197 @@ h1 {
   margin-left: 5px;
 }
 
+/* Register */
+.register-container{
+  width: 390px;
+  height: 535px;
+  margin-top: 70px;
+}
 
+
+/* SetGoal */
+
+.goal-registration-container {
+  width: 390px;
+  height: 535px;
+  margin-top: 70px;
+  overflow-y: scroll;
+}
+.goal-registration-container::-webkit-scrollbar {
+  display: none;
+}
+
+.form-container{
+  width: 360px;
+  height: 570px;
+  background-color: rgb(203, 203, 203, .6);
+  border-radius: 15px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.setgoal_form{
+  width: 340px;
+  margin: auto;
+}
+
+.goal-title{
+  display: flex;
+  font-size: 25px;
+  font-weight: 500;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+#goalName {
+  width: 230px;
+  border: none;
+  border-radius: 5px;
+}
+
+#note {
+  width: 230px;
+  border: none;
+  border-radius: 5px;
+}
+
+#startDate {
+  width: 230px;
+  border: none;
+  border-radius: 5px;
+}
+
+#endDate{
+  width: 230px;
+  border: none;
+  border-radius: 5px;
+}
+
+.form-group{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.checked-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+/* Milestone */
+
+.milestone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+#taskName{
+  width: 180px;
+  height: 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+#description {
+  width: 327px;
+  height: 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+#dueDate{
+  width: 230px;
+  border: none;
+  border-radius: 5px;
+}
+
+.add-New-Milestone {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  border: solid rgb(135, 135, 135);
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+h2 {
+  font-size: 23px;
+}
+
+.milebtn_div{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.milestone_btn{
+  width: 70px;
+  height: 28px;
+  font-size: 13px;
+  padding: 5px;
+  
+}
+
+button:hover {
+  background-color: #C4BAC9;
+}
+
+input[type=date] {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  text-transform: lowercase;
+  border: none;
+  border-radius: 5px;
+}
+
+input[type=text] {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  border: none;
+  border-radius: 5px;
+}
+
+textarea {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  border: none;
+  border-radius: 5px;
+}
+
+th {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+table {
+  width: 100%;
+}
+
+tbody {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+tbody [type=checkbox] {
+  text-align: center;
+  margin-left: 25px;
+}
 
 
 

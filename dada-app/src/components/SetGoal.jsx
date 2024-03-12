@@ -134,8 +134,9 @@ const GoalForm = () => {
   console.log(goals)
   return (
     <div className="goal-registration-container">
-      <form onSubmit={handleSubmit}>
-        <div className='goal-title'><h2>Register New Goal</h2></div>
+      <div className="form-container">
+      <form onSubmit={handleSubmit} className="setgoal_form">
+        <div className='goal-title'>Register New Goal</div>
         
         <div className="form-group">
           <label htmlFor="goalName">Goal Name:</label>
@@ -145,7 +146,7 @@ const GoalForm = () => {
             value={goalName}
             onChange={handleGoalNameChange}
             required
-            placeholder='Enter the Goal name'
+            placeholder='enter goal name'
           />
         </div>
         <div className="form-group">
@@ -154,11 +155,10 @@ const GoalForm = () => {
             id="note"
             value={note}
             onChange={handleDescriptionChange}
-            placeholder='Enter any special notes'
+            placeholder='enter any special notes'
           />
         </div>
         <div className='dates'>
-        <br></br>
         <div className="form-group">
           <label htmlFor="startDate">Start Date:</label>
           <input
@@ -203,7 +203,7 @@ const GoalForm = () => {
         </div>
        </div>
         <div className="form-group">
-          <label htmlFor="goalName">Goal Name:</label>
+          {/* <label htmlFor="goalName">Goal Name:</label>
           <input
             list="goalsList"
             type="text"
@@ -214,25 +214,26 @@ const GoalForm = () => {
             placeholder="Enter or select the Goal name"
           />
           <datalist id="goalsList">
-           {/* {
+           {
               goalList.map((goal,index) => (
                 <option key={goal.id}  value={goal.goalName} />
               ))
-           } */}
-          </datalist>
+           }
+          </datalist> */}
           
           <div className='milestone'>
             <Milestone />
           </div>
         </div>
         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
-        <div className='buttons'>
-          <button type="button" className="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
-          <button type="submit" className="btn-new-register-goal">Register</button>
-          <button type="button" className="btn-edit-register-goal">Modify</button>
-          <button type="button" className="btn-discard-register-goal">Discard</button>
+        <div className="milebtn_div">
+          <button type="button" className="milestone_btn" id="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
+          <button type="submit" className="milestone_btn" id="btn-new-register-goal">Register</button>
+          <button type="button" className="milestone_btn" id="btn-edit-register-goal">Modify</button>
+          <button type="button" className="milestone_btn" id="btn-discard-register-goal">Discard</button>
         </div> 
       </form>
+      </div>
     </div>
   )
 }

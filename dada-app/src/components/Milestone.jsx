@@ -43,22 +43,20 @@ export default function Milestone() {
     return (
 
         <>
-            <div className='main-container'>
+            <div className='milestone-container'>
                 {/* <form> */}
                     <div className='body-container'>
-                        <div className='header-container'>
-                            <h2>Milestones</h2>
-                            <button type="button" className='add-New-Milestone' onClick={handelSubmit}>+</button>
-                        </div>
-                        <div className='form-group'>
+                        <div className='milestone-header'>
+                            <label>Milestones:</label>
                             <input
                                 type="text"
                                 id="taskName"
                                 value={taskName}
                                 onChange={handleTaskNameChange}
                                 required
-                                placeholder='Enter the Task name'
-                            /><br />
+                                placeholder='enter task name'
+                            />
+                            <button type="button" className='add-New-Milestone' onClick={handelSubmit}>+</button>
                         </div>
                         <div className='form-group'>
                             <input
@@ -66,7 +64,7 @@ export default function Milestone() {
                                 id="description"
                                 value={description}
                                 onChange={handleDescriptionChange}                            
-                                placeholder='Enter the Task Description'
+                                placeholder='enter task description'
                             />
                         </div>
                         <div className='form-group'>
@@ -79,23 +77,25 @@ export default function Milestone() {
                                 required
                             />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="reminder">Active Reminder:</label>
-                            <input
-                                type="checkbox"
-                                id="activeReminder"
-                                checked={activeReminder}
-                                onChange={handleActiveReminderChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="accomplished">Accomplished:</label>
-                            <input
-                                type="checkbox"
-                                id="accomplished"
-                                checked={accomplished}
-                                onChange={handleAccomplishedChange}
-                            />
+                        <div className='checked-box'>
+                            <div className="form-group">
+                                <label htmlFor="reminder">Active Reminder:</label>
+                                <input
+                                    type="checkbox"
+                                    id="activeReminder"
+                                    checked={activeReminder}
+                                    onChange={handleActiveReminderChange}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="accomplished">Accomplished:</label>
+                                <input
+                                    type="checkbox"
+                                    id="accomplished"
+                                    checked={accomplished}
+                                    onChange={handleAccomplishedChange}
+                                />
+                            </div>
                         </div>
                         <div>
                         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
