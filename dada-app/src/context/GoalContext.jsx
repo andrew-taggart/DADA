@@ -7,29 +7,39 @@ export const GoalContext = React.createContext()
 const  GoalContextProvide = (props) => {
 
     // Initilizing goals via context 
-    const [goals,setGoals] = useState([
+    const [goals,setGoals] = useState({})
         // { goalName: 'Learn React', startDate: '2024-03-09', endDate: '2024-03-23', accomplished:false ,reminder: false ,note: 'Testing'}
-    ])
+    // ])
 
-    // useEffect(() => {
-    //     const loadAllGoals = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:3001/goals')
-    //             setGoals(response.data); // Assuming the backend returns an array of goals
-    //         } catch (error) {
-    //             console.error("Error loading goals:", error)
-    //             // Optionally, you could handle this error more gracefully
-    //         }
-    //     };
+    useEffect(() => {
+        // const loadAllGoals = async () => {
+        //     try {
+        //         const response = await axios.get('http://localhost:3001/goals')
+        //         setGoals(response.data); // Assuming the backend returns an array of goals
+        //     } catch (error) {
+        //         console.error("Error loading goals:", error)
+        //         // Optionally, you could handle this error more gracefully
+        //     }
+        // }
 
-    //     loadAllGoals()
-    // }, [])
+        // loadAllGoals()
 
-    const addNewGoal = ( goalName, startDate,endDate, accomplished,reminder,note) => {
-        setGoals(prevGoals => [
-            ...prevGoals,
-            { goalName, startDate, endDate, accomplished, reminder, note }
-        ])
+    }, [])
+
+    const addNewGoal = async (user, goalName, startDate,endDate, accomplished,isActive,notes) => {
+    // setGoals(prevGoals => [
+    //     ...prevGoals,
+    //     { goalName, startDate, endDate, accomplished, reminder, note }                
+    // ])
+    setGoals({user, goalName, startDate, endDate, accomplished, isActive, notes })
+    try{
+        console.log('Before APi call')
+        const response = await axios.post('http://localhost:3001/goals',goals)
+        console.log('After APi call', response)
+    }catch(error)
+    {
+        console.log('Unable to Creat Goals files',error)
+    }
     }
 
     return (

@@ -5,6 +5,8 @@ import React, { useState, useContext } from 'react'
 // ({ onAddMilestone, goalId })
 export default function Milestone() {
 
+   
+
     const [taskName, setTaskName] = useState('')
     const [dueDate, setDueDate] = useState('')
     const [accomplished, setAccomplished] = useState(false)
@@ -56,7 +58,6 @@ export default function Milestone() {
                                 id="taskName"
                                 value={taskName}
                                 onChange={handleTaskNameChange}
-                                required
                                 placeholder='Enter the Task name'
                             /><br />
                         </div>
@@ -75,8 +76,7 @@ export default function Milestone() {
                                 type="date"
                                 id="dueDate"
                                 value={dueDate}
-                                onChange={handleDueDateChange}
-                                required
+                                onChange={handleDueDateChange}                               
                             />
                         </div>
                         <div className="form-group">
@@ -120,8 +120,8 @@ export default function Milestone() {
                                         <td><input type='checkbox' checked={milestone.activeReminder} readOnly/></td>
                                         <td><input type='checkbox' checked={milestone.accomplished} readOnly/></td>
                                         <td>
-                                            <div className='edit-milestone'><i class="fa-regular fa-pen-to-square"></i></div>    
-                                            <div className='delete-milestone'><i class="fa-solid fa-trash"></i></div>
+                                            <div className='edit-milestone'><i className="fa-regular fa-pen-to-square"></i></div>    
+                                            <div className='delete-milestone'><i className="fa-solid fa-trash"></i></div>
                                         </td>
                                         </tr>
                                 ))

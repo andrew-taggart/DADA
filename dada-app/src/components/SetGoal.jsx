@@ -4,40 +4,43 @@ import Milestone from './Milestone'
 import axios from 'axios'
 
 
-// const GoalForm = ({ onGoalRegister }) => {
+
 const GoalForm = () => {
 
   const { goals, addNewGoal } = useContext(GoalContext)
 
-  const [goalList, setGoalList] = useState('')
+  const { milestones, addMilestone } = useState([])
+  
+  const [user,setUser] = useState('')
   const [goalName, setGoalName] = useState('')
-  const [note, setDescription] = useState('')
+  const [notes, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
-  const [reminder, setReminder] = useState(false)
-  const [accomplish, setAccomplish] = useState(false)
+  const [isActive, setReminder] = useState(false)
+  const [accomplished, setAccomplish] = useState(false)
 
   const [alertMessage, setAlertMessage] = useState('')
 
-//   useEffect(() => {
+  useEffect(() => {
 
     
-//   const loadAllGoals = async () => {
+  const loadCurrentUser = async () => {
+    let userId='65ef2b370ba628b5c1cd87d7'
+    try{
+        //const responseUser = await axios.get(`http://localhost:3001/users/${userId}`)
+        // http://localhost:3001/users/65ef2b370ba628b5c1cd87d7
+        //console.log("UserID",responseUser.data)
+        setUser(userId)
 
-//     try{
-//         const responseGoal = await axios.get('http://localhost:3001/goals')
-//         console.log(responseGoal.data)
-//         setGoalList(responseGoal.data)
+      }catch(error){
+        console.error("Error finding currentUser information:", error)
+        setAlertMessage("Error finding currentUser information: ", error.message)
+      }
 
-//       }catch(error){
-//         console.error("Error loading goals:", error)
-//         setAlertMessage("Error loading goals: ", error.message)
-//       }
+}
+loadCurrentUser()
 
-// }
-// loadAllGoals()
-
-//   },[])
+  },[])
 
 
   const handleGoalNameChange = (e) => {
@@ -99,19 +102,7 @@ const GoalForm = () => {
       return // Exit the function if validation fails
     }
 
-    // // Create goal object
-    // const newGoal = {
-    //   goalName,
-    //   description,
-    //   startDate,
-    //   endDate,
-    //   reminder,
-    //   accomplish
-    // }
-
-    // setGoals(newGoal)
-
-    addNewGoal(goalName, startDate, endDate, accomplish, reminder, note)
+    addNewGoal(user,goalName, startDate, endDate, accomplished, isActive, notes)
 
   
     // Clear form fields
@@ -122,7 +113,7 @@ const GoalForm = () => {
   }
 
   const handelClearForm = () => {
-
+    setUser('')
     setGoalName('')
     setDescription('')
     setStartDate('')
@@ -131,7 +122,7 @@ const GoalForm = () => {
     setAccomplish(false)
 
   }
-  console.log(goals)
+  //console.log(goals)
   return (
     <div className="goal-registration-container">
       <form onSubmit={handleSubmit}>
@@ -151,8 +142,8 @@ const GoalForm = () => {
         <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
-            id="note"
-            value={note}
+            id="notes"
+            value={notes}
             onChange={handleDescriptionChange}
             placeholder='Enter any special notes'
           />
@@ -187,8 +178,8 @@ const GoalForm = () => {
           <label htmlFor="reminder">Reminder:</label>
           <input
             type="checkbox"
-            id="reminder"
-            checked={reminder}
+            id="isActive"
+            checked={isActive}
             onChange={handleReminderChange}
           />
         </div>
@@ -197,30 +188,12 @@ const GoalForm = () => {
           <input
             type="checkbox"
             id="isAccomplished"
-            checked={accomplish}
+            checked={accomplished}
             onChange={handleAccomplishChange}
           />
         </div>
        </div>
-        <div className="form-group">
-          <label htmlFor="goalName">Goal Name:</label>
-          <input
-            list="goalsList"
-            type="text"
-            id="goalName"
-            value={goalName}
-            onChange={handleGoalNameChange}
-            required
-            placeholder="Enter or select the Goal name"
-          />
-          <datalist id="goalsList">
-           {/* {
-              goalList.map((goal,index) => (
-                <option key={goal.id}  value={goal.goalName} />
-              ))
-           } */}
-          </datalist>
-          
+        <div className="form-group">        
           <div className='milestone'>
             <Milestone />
           </div>
@@ -229,8 +202,8 @@ const GoalForm = () => {
         <div className='buttons'>
           <button type="button" className="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
           <button type="submit" className="btn-new-register-goal">Register</button>
-          <button type="button" className="btn-edit-register-goal">Modify</button>
-          <button type="button" className="btn-discard-register-goal">Discard</button>
+          {/* <button type="button" className="btn-edit-register-goal">Modify</button>
+          <button type="button" className="btn-discard-register-goal">Discard</button> */}
         </div> 
       </form>
     </div>
