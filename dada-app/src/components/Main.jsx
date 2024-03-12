@@ -4,6 +4,7 @@ import Goals from './GoalPage'
 import SignIn from './SignIn'
 import Register from './Register'
 import Calendar from './Calendar'
+import GoalDetails from './GoalDetails'
 import {Routes, Route} from 'react-router-dom'
 
 const Main = () => {
@@ -16,6 +17,7 @@ const Main = () => {
             <Route path="/setgoal" element={<GoalForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/calendar" element={<Calendar />} />
+            <Route path='/goals/:goalId' element={<GoalDetails />} />
         </Routes>
         </div>
     )
