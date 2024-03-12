@@ -7,7 +7,7 @@ const Goal = new Schema(
         endDate: {type: Date, required: true},
         accomplished: { type: Boolean },
         isActive: {type: Boolean },
-        notes: { type: String, required: true}
+        notes: { type: String}
     },
     { timestamps: true }
 )

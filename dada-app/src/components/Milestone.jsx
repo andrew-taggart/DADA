@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 
-// import { useAsyncError } from 'react-router-dom'
 
-// ({ onAddMilestone, goalId })
-export default function Milestone() {
+export default function Milestone({ onAddMilestone, clearMilestones }) {
+
+
 
     const [taskName, setTaskName] = useState('')
     const [dueDate, setDueDate] = useState('')
@@ -12,7 +12,7 @@ export default function Milestone() {
     const [description, setDescription] = useState('')
 
     const [alertMessage, setAlertMessage] = useState('')
-    const [milestones,setMilestones] = useState([])
+    const [milestones, setMilestones] = useState([])
 
     const handleTaskNameChange = (e) => setTaskName(e.target.value)
     const handleDescriptionChange = (e) => setDescription(e.target.value)
@@ -20,26 +20,43 @@ export default function Milestone() {
     const handleActiveReminderChange = (e) => setActiveReminder(e.target.checked)
     const handleAccomplishedChange = (e) => setAccomplished(e.target.checked)
 
+
+
     const handelSubmit = (e) => {
         e.preventDefault()
-        if (!taskName || !dueDate) {
-            setAlertMessage('Task name and due date are required.')
-            return
+        try {
+            if (!taskName || !dueDate) {
+                setAlertMessage('Task name and due date are required.')
+                return
+            }
+            const newMilestone = {
+                taskName, dueDate, accomplished, activeReminder, description
+            }
+
+            setMilestones([...milestones, newMilestone])
+
+            //Passing set of Milestones into parent (Goal) components
+            onAddMilestone(newMilestone)
+
+            setTaskName('')
+            setDueDate('')
+            setAccomplished(false)
+            setActiveReminder(false)
+            setDescription('')
+            setAlertMessage('')
+            // setMilestones('')
+            // clearMilestones()
+
+        } catch (error) {
+            // setAlertMessage('Unable to add milestone.', error.message)
         }
-        const newMilestone = {
-            taskName,dueDate,accomplished,activeReminder,description
-        }
-
-        setMilestones([...milestones, newMilestone])
-
-        setTaskName('')
-        setDueDate('')
-        setAccomplished(false)
-        setActiveReminder(false)
-        setDescription('')
-
 
     }
+   
+    const deleteMilestone = (indexToDelete) => {
+        setMilestones(milestones.filter((_, index) => index !== indexToDelete));
+    }
+
     return (
 
         <>
@@ -53,7 +70,6 @@ export default function Milestone() {
                                 id="taskName"
                                 value={taskName}
                                 onChange={handleTaskNameChange}
-                                required
                                 placeholder='enter task name'
                             />
                             <button type="button" className='add-New-Milestone' onClick={handelSubmit}>+</button>
@@ -74,7 +90,7 @@ export default function Milestone() {
                                 id="dueDate"
                                 value={dueDate}
                                 onChange={handleDueDateChange}
-                                required
+                                
                             />
                         </div>
                         <div className='checked-box'>
@@ -99,40 +115,38 @@ export default function Milestone() {
                         </div>
                         <div>
                         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
-                        </div>
-                        <table className='table-milestone'>
-                           <thead>
-                           <tr>
+                    </div>
+                    <table className='table-milestone'>
+                        <thead>
+                            <tr>
                                 <th>Task Name</th>
                                 <th>Due Date</th>
                                 {/* <th>Description</th> */}
                                 <th>Reminder</th>
                                 <th>Accomplished</th>
                             </tr>
-                           </thead>
-                           <tbody>
+                        </thead>
+                        <tbody>
                             {
                                 milestones.map((milestone, index) => (
                                     <tr key={index}>
                                         <td>{milestone.taskName}</td>
                                         <td>{milestone.dueDate}</td>
                                         {/* <td>{milestones.description}</td> */}
-                                        <td><input type='checkbox' checked={milestone.activeReminder} readOnly/></td>
-                                        <td><input type='checkbox' checked={milestone.accomplished} readOnly/></td>
+                                        <td><input type='checkbox' checked={milestone.activeReminder} readOnly /></td>
+                                        <td><input type='checkbox' checked={milestone.accomplished} readOnly /></td>
                                         <td>
-                                            <div className='edit-milestone'><i class="fa-regular fa-pen-to-square"></i></div>    
-                                            <div className='delete-milestone'><i class="fa-solid fa-trash"></i></div>
+                                            {/* <div className='edit-milestone'><i className="fa-regular fa-pen-to-square"></i></div>     */}
+                                            <div className='delete-milestone' onClick={() => deleteMilestone(index)} ><i className="fa-solid fa-trash"></i></div>
                                         </td>
-                                        </tr>
+                                    </tr>
                                 ))
                             }
-                           </tbody>
+                        </tbody>
 
-                        </table>
-                        {/* <div className="form-group">
-                            <button className='edit' type='button'>EDIT</button><button className='delete' type="button">DELETE</button>
-                        </div> */}
-                    </div>
+                    </table>
+                    {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
+                </div>
 
                 {/* </form> */}
             </div>

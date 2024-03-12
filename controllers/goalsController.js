@@ -21,7 +21,9 @@ const getGoalById = async (req, res) => {
 }
 const createGoal = async (req, res) => {
     try {
+        console.log("Req body ",req.body)
         const goal = await new Goal(req.body)
+        console.log("Before Save ",goal)
         await goal.save()
         return res.status(201).json({
             goal
@@ -30,6 +32,7 @@ const createGoal = async (req, res) => {
         return res.status(500).json({error: error.message})
     }
 }
+
 const updateGoal = async (req, res) => {
     try {
         let { id } = req.params;

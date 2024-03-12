@@ -23,11 +23,13 @@ app.get('/', (req, res) => res.send('welcome to our landing page!'))
 app.get('/goals', goalsController.getAllGoals)
 app.get('/users', userController.getAllUsers)
 app.get('/milestones', milestoneController.getAllMilestones)
+// app.get('/goals/:name', goalsController.getAllGoals)
 
 app.get('/goals/:id', goalsController.getGoalById)
 app.get('/users/:id', userController.getUserById)
 app.get('/users/name/:name', userController.getUserByUsername)
 app.get('/milestones/:id', milestoneController.getMilestoneById)
+
 
 app.post('/goals', goalsController.createGoal)
 app.post('/users', userController.createUser)

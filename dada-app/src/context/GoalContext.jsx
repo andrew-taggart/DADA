@@ -1,5 +1,6 @@
 import React, { useState ,useEffect} from 'react'
 import axios from 'axios'
+import { Await } from 'react-router-dom'
 export const GoalContext = React.createContext()
  
 
@@ -7,29 +8,27 @@ export const GoalContext = React.createContext()
 const  GoalContextProvide = (props) => {
 
     // Initilizing goals via context 
-    const [goals,setGoals] = useState([
-        // { goalName: 'Learn React', startDate: '2024-03-09', endDate: '2024-03-23', accomplished:false ,reminder: false ,note: 'Testing'}
-    ])
+    const [goals,setGoals] = useState({})
+   
+    const addNewGoal = async (user, goalName, startDate,endDate, accomplished,isActive,notes,milestones) => {
 
-    // useEffect(() => {
-    //     const loadAllGoals = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:3001/goals')
-    //             setGoals(response.data); // Assuming the backend returns an array of goals
-    //         } catch (error) {
-    //             console.error("Error loading goals:", error)
-    //             // Optionally, you could handle this error more gracefully
-    //         }
-    //     };
+    // setGoals({user, goalName, startDate, endDate, accomplished, isActive, notes, milestones })
+    const goalData = { user, goalName, startDate, endDate, accomplished, isActive, notes, milestones }
 
-    //     loadAllGoals()
-    // }, [])
+    try{
+        // console.log('Before APi call' , goalData)
+        const response = await axios.post('http://localhost:3001/goals',goalData)
 
-    const addNewGoal = ( goalName, startDate,endDate, accomplished,reminder,note) => {
-        setGoals(prevGoals => [
-            ...prevGoals,
-            { goalName, startDate, endDate, accomplished, reminder, note }
-        ])
+        if(response.data && response.data.goal._id) {
+            for (const milestone of milestones) {
+              
+              await axios.post('http://localhost:3001/milestones', { ...milestone, goal: response.data.goal._id });
+            }
+          }
+    }catch(error)
+    {
+        console.log('Unable to Creat Goals files',error)
+    }
     }
 
     return (
