@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react'
 // import { useAsyncError } from 'react-router-dom'
 
 // ({ onAddMilestone, goalId })
-export default function Milestone() {
+export default function Milestone({onAddMilestone}) {
 
    
 
@@ -22,6 +22,8 @@ export default function Milestone() {
     const handleActiveReminderChange = (e) => setActiveReminder(e.target.checked)
     const handleAccomplishedChange = (e) => setAccomplished(e.target.checked)
 
+    
+
     const handelSubmit = (e) => {
         e.preventDefault()
         if (!taskName || !dueDate) {
@@ -33,6 +35,11 @@ export default function Milestone() {
         }
 
         setMilestones([...milestones, newMilestone])
+
+        //Passing set of Milestones into parent (Goal) components
+        
+        onAddMilestone(newMilestone)
+        
 
         setTaskName('')
         setDueDate('')

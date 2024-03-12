@@ -26,16 +26,15 @@ const  GoalContextProvide = (props) => {
 
     }, [])
 
-    const addNewGoal = async (user, goalName, startDate,endDate, accomplished,isActive,notes) => {
-    // setGoals(prevGoals => [
-    //     ...prevGoals,
-    //     { goalName, startDate, endDate, accomplished, reminder, note }                
-    // ])
-    setGoals({user, goalName, startDate, endDate, accomplished, isActive, notes })
+    const addNewGoal = async (user, goalName, startDate,endDate, accomplished,isActive,notes, milestones) => {
+
+    setGoals({user, goalName, startDate, endDate, accomplished, isActive, notes, milestones })
     try{
-        console.log('Before APi call')
+        console.log('Before APi call' , goals)
         const response = await axios.post('http://localhost:3001/goals',goals)
         console.log('After APi call', response)
+        console.log('TAking id', response.data)
+
     }catch(error)
     {
         console.log('Unable to Creat Goals files',error)

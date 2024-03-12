@@ -9,11 +9,11 @@ const GoalForm = () => {
 
   const { goals, addNewGoal } = useContext(GoalContext)
 
-  const { milestones, addMilestone } = useState([])
+  const [milestones, setMilestones ] = useState([])
   
   const [user,setUser] = useState('')
   const [goalName, setGoalName] = useState('')
-  const [notes, setDescription] = useState('')
+  const [notes, setDescription] = useState('12345')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [isActive, setReminder] = useState(false)
@@ -21,9 +21,11 @@ const GoalForm = () => {
 
   const [alertMessage, setAlertMessage] = useState('')
 
+
   useEffect(() => {
 
-    
+
+
   const loadCurrentUser = async () => {
     let userId='65ef2b370ba628b5c1cd87d7'
     try{
@@ -42,6 +44,10 @@ loadCurrentUser()
 
   },[])
 
+  const addMilestone = (newMilestone) => {
+      setMilestones((currentMilestone) => [...currentMilestone, newMilestone])
+      console.log('NewMilestone--',newMilestone)
+    }
 
   const handleGoalNameChange = (e) => {
 
@@ -101,10 +107,11 @@ loadCurrentUser()
       setAlertMessage('Please fill in all required fields.')
       return // Exit the function if validation fails
     }
+    console.log('Adding milestone inn to gole --',milestones)
+    //addNewGoal(user,goalName, startDate, endDate, accomplished, isActive, notes)
+    addNewGoal(user,goalName, startDate, endDate, accomplished, isActive, notes, milestones)
 
-    addNewGoal(user,goalName, startDate, endDate, accomplished, isActive, notes)
-
-  
+    
     // Clear form fields
     handelClearForm()
 
@@ -122,7 +129,7 @@ loadCurrentUser()
     setAccomplish(false)
 
   }
-  //console.log(goals)
+  console.log( "Goals" ,goals)
   return (
     <div className="goal-registration-container">
       <form onSubmit={handleSubmit}>
@@ -195,7 +202,7 @@ loadCurrentUser()
        </div>
         <div className="form-group">        
           <div className='milestone'>
-            <Milestone />
+            <Milestone onAddMilestone={addMilestone}/>
           </div>
         </div>
         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
