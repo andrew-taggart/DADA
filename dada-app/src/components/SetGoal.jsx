@@ -108,9 +108,7 @@ try{
     if (!goalName || !startDate || !endDate) {
       setAlertMessage('Please fill in all required fields.')
       return 
-    }
-
-    if(!milestones){
+    }else if(milestones.length === 0){
       setAlertMessage('Please fill in all milestone(s).')
       return 
     }
@@ -131,6 +129,7 @@ try{
   }
 
   const handelClearForm = () => {
+    
     setUser('')
     setGoalName('')
     setDescription('')
@@ -138,6 +137,7 @@ try{
     setEndDate('')
     setReminder(false)
     setAccomplish(false)
+    setAlertMessage('')
 
     clearMilestones()
 
@@ -216,25 +216,7 @@ try{
           />
         </div>
        </div>
-        <div className="form-group">
-          {/* <label htmlFor="goalName">Goal Name:</label>
-          <input
-            list="goalsList"
-            type="text"
-            id="goalName"
-            value={goalName}
-            onChange={handleGoalNameChange}
-            required
-            placeholder="Enter or select the Goal name"
-          />
-          <datalist id="goalsList">
-           {
-              goalList.map((goal,index) => (
-                <option key={goal.id}  value={goal.goalName} />
-              ))
-           }
-          </datalist> */}
-          
+        <div className="form-group">          
           <div className='milestone'>
             <Milestone onAddMilestone={addMilestone} clearMilestones={clearMilestones} milestones={milestones}/>
           </div>
@@ -243,8 +225,8 @@ try{
         <div className="milebtn_div">
           <button type="button" className="milestone_btn" id="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
           <button type="submit" className="milestone_btn" id="btn-new-register-goal">Register</button>
-          <button type="button" className="milestone_btn" id="btn-edit-register-goal">Modify</button>
-          <button type="button" className="milestone_btn" id="btn-discard-register-goal">Discard</button>
+          {/* <button type="button" className="milestone_btn" id="btn-edit-register-goal">Modify</button>
+          <button type="button" className="milestone_btn" id="btn-discard-register-goal">Discard</button> */}
         </div> 
       </form>
       </div>

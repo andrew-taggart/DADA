@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 
 
 export default function Milestone({ onAddMilestone, clearMilestones }) {
@@ -43,11 +43,12 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
             setAccomplished(false)
             setActiveReminder(false)
             setDescription('')
+            setAlertMessage('')
             // setMilestones('')
             // clearMilestones()
 
         } catch (error) {
-            setAlertMessage('Unable to add milestone.', error.message)
+            // setAlertMessage('Unable to add milestone.', error.message)
         }
 
     }
@@ -69,7 +70,6 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
                                 id="taskName"
                                 value={taskName}
                                 onChange={handleTaskNameChange}
-                                required
                                 placeholder='enter task name'
                             />
                             <button type="button" className='add-New-Milestone' onClick={handelSubmit}>+</button>
@@ -90,7 +90,7 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
                                 id="dueDate"
                                 value={dueDate}
                                 onChange={handleDueDateChange}
-                                required
+                                
                             />
                         </div>
                         <div className='checked-box'>
