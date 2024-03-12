@@ -49,6 +49,11 @@ export default function Milestone({onAddMilestone}) {
 
 
     }
+
+    const deleteMilestone = (indexToDelete) => {
+        setMilestones(milestones.filter((_, index) => index !== indexToDelete));
+      }
+      
     return (
 
         <>
@@ -66,6 +71,7 @@ export default function Milestone({onAddMilestone}) {
                                 value={taskName}
                                 onChange={handleTaskNameChange}
                                 placeholder='Enter the Task name'
+                                required
                             /><br />
                         </div>
                         <div className='form-group'>
@@ -83,7 +89,8 @@ export default function Milestone({onAddMilestone}) {
                                 type="date"
                                 id="dueDate"
                                 value={dueDate}
-                                onChange={handleDueDateChange}                               
+                                onChange={handleDueDateChange}
+                                required                          
                             />
                         </div>
                         <div className="form-group">
@@ -127,8 +134,8 @@ export default function Milestone({onAddMilestone}) {
                                         <td><input type='checkbox' checked={milestone.activeReminder} readOnly/></td>
                                         <td><input type='checkbox' checked={milestone.accomplished} readOnly/></td>
                                         <td>
-                                            <div className='edit-milestone'><i className="fa-regular fa-pen-to-square"></i></div>    
-                                            <div className='delete-milestone'><i className="fa-solid fa-trash"></i></div>
+                                            {/* <div className='edit-milestone'><i className="fa-regular fa-pen-to-square"></i></div>     */}
+                                            <div className='delete-milestone' onClick={() => deleteMilestone(index)} ><i className="fa-solid fa-trash"></i></div>
                                         </td>
                                         </tr>
                                 ))

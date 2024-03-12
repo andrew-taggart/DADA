@@ -6,7 +6,7 @@ const Milestone = new Schema(
         dueDate : {type: Date, required: true},
         accomplished: { type: Boolean },
         activeReminder: {type: Boolean },
-        description: { type: String, required: true}
+        description: { type: String}
     },
     { timestamps: true }
 )

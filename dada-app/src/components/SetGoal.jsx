@@ -13,7 +13,7 @@ const GoalForm = () => {
   
   const [user,setUser] = useState('')
   const [goalName, setGoalName] = useState('')
-  const [notes, setDescription] = useState('12345')
+  const [notes, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [isActive, setReminder] = useState(false)
@@ -102,7 +102,7 @@ loadCurrentUser()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+try{
     if (!goalName || !startDate || !endDate) {
       setAlertMessage('Please fill in all required fields.')
       return // Exit the function if validation fails
@@ -115,8 +115,12 @@ loadCurrentUser()
     // Clear form fields
     handelClearForm()
 
-    setAlertMessage('Goal successfully registered!')
-
+    setAlertMessage('Goal successfully registered !')
+  }
+  catch(error)
+  {
+    setAlertMessage('Unable to register goal !')
+  }
   }
 
   const handelClearForm = () => {
