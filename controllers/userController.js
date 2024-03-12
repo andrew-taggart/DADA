@@ -19,6 +19,21 @@ const getUserById = async (req, res) => {
         return res.status(500).send(error.message);
     }
 }
+
+const getUserByUsername = async (req, res) => {
+    try {
+        const { name } = req.params
+        let { userName } = req.query
+        const user = await User.find( {userName: name} )
+        if (user) {
+            return res.json(user)
+        }
+        return res.status(404).send('User with the specified username does not exists');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
 const createUser = async (req, res) => {
     try {
         const user = await new User(req.body)
@@ -60,4 +75,5 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
+    getUserByUsername
 }

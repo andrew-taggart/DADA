@@ -5,14 +5,18 @@ import SignIn from './SignIn'
 import Register from './Register'
 import Calendar from './Calendar'
 import {Routes, Route} from 'react-router-dom'
+import axios from 'axios'
+
+
 
 const Main = () => {
+
     return (
         <div className='main-container'>
          <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<SignIn />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/goals" element={<Goals />} />
-            <Route path="/signin" element={<SignIn />} />
             <Route path="/setgoal" element={<GoalForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/calendar" element={<Calendar />} />
