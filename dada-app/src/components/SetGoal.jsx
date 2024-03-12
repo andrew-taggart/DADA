@@ -122,7 +122,7 @@ try{
     // Clear form fields
     handelClearForm()
 
-    setAlertMessage('Goal successfully registered !')
+    setAlertMessage('Goal and Milestones are successfully registered !')
   }
   catch(error)
   {
@@ -139,6 +139,11 @@ try{
     setReminder(false)
     setAccomplish(false)
 
+    clearMilestones()
+
+  }
+  const clearMilestones =() =>{
+    setMilestones([])
   }
   console.log( "Goals" ,goals)
   return (
@@ -213,7 +218,7 @@ try{
        </div>
         <div className="form-group">        
           <div className='milestone'>
-            <Milestone onAddMilestone={addMilestone}/>
+            <Milestone onAddMilestone={addMilestone} clearMilestones={clearMilestones} milestones={milestones}/>
           </div>
         </div>
         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
