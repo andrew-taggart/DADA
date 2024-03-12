@@ -5,18 +5,18 @@ import Footer from './components/Footer'
 import './App.css'
 
 //Importing context
-import GoalContext from './context/GoalContext'
+import GoalContextProvide from './context/GoalContext'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <GoalContext>
+      <GoalContextProvide>
       <Header />
       <Main />
-      {/* <Footer /> */}
-      </GoalContext>
+      <Footer />
+      </GoalContextProvide>
     </div>
   )
 }

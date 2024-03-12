@@ -10,7 +10,7 @@ const getAllGoals = async (req, res) => {
 const getGoalById = async (req, res) => {
     try {
         const { id } = req.params
-        const goal = await UseGoalr.findById(id)
+        const goal = await Goal.findById(id)
         if (goal) {
             return res.json(goal)
         }
@@ -38,7 +38,7 @@ const updateGoal = async (req, res) => {
         let { id } = req.params;
         let goal = await Goal.findByIdAndUpdate(id, req.body, { new: true })
         if (goal) {
-            return res.status(200).json(tv)
+            return res.status(200).json(goal)
         }
         throw new Error("goal not found")
     } catch (error) {
@@ -48,7 +48,7 @@ const updateGoal = async (req, res) => {
 const deleteGoal = async (req, res) => {
     try {
         const { id } = req.params;
-        const deleted = await TV.findByIdAndDelete(id)
+        const deleted = await Goal.findByIdAndDelete(id)
         if (deleted) {
             return res.status(200).send("goal deleted")
         }

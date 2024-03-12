@@ -148,8 +148,9 @@ try{
   console.log( "Goals" ,goals)
   return (
     <div className="goal-registration-container">
-      <form onSubmit={handleSubmit}>
-        <div className='goal-title'><h2>Register New Goal</h2></div>
+      <div className="form-container">
+      <form onSubmit={handleSubmit} className="setgoal_form">
+        <div className='goal-title'>Register New Goal</div>
         
         <div className="form-group">
           <label htmlFor="goalName">Goal Name:</label>
@@ -159,7 +160,7 @@ try{
             value={goalName}
             onChange={handleGoalNameChange}
             required
-            placeholder='Enter the Goal name'
+            placeholder='enter goal name'
           />
         </div>
         <div className="form-group">
@@ -168,11 +169,10 @@ try{
             id="notes"
             value={notes}
             onChange={handleDescriptionChange}
-            placeholder='Enter any special notes'
+            placeholder='enter any special notes'
           />
         </div>
         <div className='dates'>
-        <br></br>
         <div className="form-group">
           <label htmlFor="startDate">Start Date:</label>
           <input
@@ -216,19 +216,38 @@ try{
           />
         </div>
        </div>
-        <div className="form-group">        
+        <div className="form-group">
+          {/* <label htmlFor="goalName">Goal Name:</label>
+          <input
+            list="goalsList"
+            type="text"
+            id="goalName"
+            value={goalName}
+            onChange={handleGoalNameChange}
+            required
+            placeholder="Enter or select the Goal name"
+          />
+          <datalist id="goalsList">
+           {
+              goalList.map((goal,index) => (
+                <option key={goal.id}  value={goal.goalName} />
+              ))
+           }
+          </datalist> */}
+          
           <div className='milestone'>
             <Milestone onAddMilestone={addMilestone} clearMilestones={clearMilestones} milestones={milestones}/>
           </div>
         </div>
         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
-        <div className='buttons'>
-          <button type="button" className="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
-          <button type="submit" className="btn-new-register-goal">Register</button>
-          {/* <button type="button" className="btn-edit-register-goal">Modify</button>
-          <button type="button" className="btn-discard-register-goal">Discard</button> */}
+        <div className="milebtn_div">
+          <button type="button" className="milestone_btn" id="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
+          <button type="submit" className="milestone_btn" id="btn-new-register-goal">Register</button>
+          <button type="button" className="milestone_btn" id="btn-edit-register-goal">Modify</button>
+          <button type="button" className="milestone_btn" id="btn-discard-register-goal">Discard</button>
         </div> 
       </form>
+      </div>
     </div>
   )
 }

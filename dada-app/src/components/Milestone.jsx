@@ -59,61 +59,61 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
     return (
 
         <>
-            <div className='main-container'>
+            <div className='milestone-container'>
                 {/* <form> */}
-                <div className='body-container'>
-                    <div className='header-container'>
-                        <h2>Milestones</h2>
-                        <button type="button" className='add-New-Milestone' onClick={handelSubmit}>+</button>
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            type="text"
-                            id="taskName"
-                            value={taskName}
-                            onChange={handleTaskNameChange}
-                            placeholder='Enter the Task name'
-
-                        /><br />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            type="text"
-                            id="description"
-                            value={description}
-                            onChange={handleDescriptionChange}
-                            placeholder='Enter the Task Description'
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <label htmlFor="dueDate">Due Date:</label>
-                        <input
-                            type="date"
-                            id="dueDate"
-                            value={dueDate}
-                            onChange={handleDueDateChange}
-
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="reminder">Active Reminder:</label>
-                        <input
-                            type="checkbox"
-                            id="activeReminder"
-                            checked={activeReminder}
-                            onChange={handleActiveReminderChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="accomplished">Accomplished:</label>
-                        <input
-                            type="checkbox"
-                            id="accomplished"
-                            checked={accomplished}
-                            onChange={handleAccomplishedChange}
-                        />
-                    </div>
-                    <div>
+                    <div className='body-container'>
+                        <div className='milestone-header'>
+                            <label>Milestones:</label>
+                            <input
+                                type="text"
+                                id="taskName"
+                                value={taskName}
+                                onChange={handleTaskNameChange}
+                                required
+                                placeholder='enter task name'
+                            />
+                            <button type="button" className='add-New-Milestone' onClick={handelSubmit}>+</button>
+                        </div>
+                        <div className='form-group'>
+                            <input
+                                type="text"
+                                id="description"
+                                value={description}
+                                onChange={handleDescriptionChange}                            
+                                placeholder='enter task description'
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor="dueDate">Due Date:</label>
+                            <input
+                                type="date"
+                                id="dueDate"
+                                value={dueDate}
+                                onChange={handleDueDateChange}
+                                required
+                            />
+                        </div>
+                        <div className='checked-box'>
+                            <div className="form-group">
+                                <label htmlFor="reminder">Active Reminder:</label>
+                                <input
+                                    type="checkbox"
+                                    id="activeReminder"
+                                    checked={activeReminder}
+                                    onChange={handleActiveReminderChange}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="accomplished">Accomplished:</label>
+                                <input
+                                    type="checkbox"
+                                    id="accomplished"
+                                    checked={accomplished}
+                                    onChange={handleAccomplishedChange}
+                                />
+                            </div>
+                        </div>
+                        <div>
                         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
                     </div>
                     <table className='table-milestone'>

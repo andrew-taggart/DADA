@@ -35,7 +35,7 @@ const updateMilestone = async (req, res) => {
         let { id } = req.params;
         let milestone = await Milestone.findByIdAndUpdate(id, req.body, { new: true })
         if (milestone) {
-            return res.status(200).json(tv)
+            return res.status(200).json(milestone)
         }
         throw new Error("milestone not found")
     } catch (error) {
@@ -45,7 +45,7 @@ const updateMilestone = async (req, res) => {
 const deleteMilestone = async (req, res) => {
     try {
         const { id } = req.params;
-        const deleted = await TV.findByIdAndDelete(id)
+        const deleted = await Milestone.findByIdAndDelete(id)
         if (deleted) {
             return res.status(200).send("milestone deleted")
         }
