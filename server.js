@@ -2,7 +2,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 const db = require('./db')
+
+
 
 //import Controllers
 const goalsController = require('./controllers/goalsController')
@@ -10,9 +14,11 @@ const userController = require('./controllers/userController')
 const milestoneController = require('./controllers/milestoneController')
 
 const app = express()
+app.use(express.json())
 app.use(cors())
 app.use(logger('dev'))
 app.use(bodyParser.json())
+
 const PORT = process.env.PORT || 3001
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
@@ -34,6 +40,12 @@ app.get('/milestones/:id', milestoneController.getMilestoneById)
 app.post('/goals', goalsController.createGoal)
 app.post('/users', userController.createUser)
 app.post('/milestones', milestoneController.createMilestone)
+// app.post('/users', (req, res) => {
+//     const {userName, password, email} = req.body
+//     User.create({userName, password, email})
+//     .then(user => res.json(user))
+//     .catch(err => res.json(err))
+// })
 
 app.put('/goals/:id', goalsController.updateGoal)
 app.put('/users/:id', userController.updateUser)
