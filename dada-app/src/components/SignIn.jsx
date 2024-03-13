@@ -3,13 +3,13 @@ import { useNavigate, Link } from 'react-router-dom'; // Import Link along with 
 import axios from 'axios'
 
 
-const response = await axios.get(`http://localhost:3001/users/name/adminBan`)
+// const response = await axios.get(`http://localhost:3001/users/name/adminBan`)
     // console.log(response.data)
 
-const usernamedb = response.data[0].userName
-const pwdb = response.data[0].password
-console.log(usernamedb)
-console.log(pwdb)
+// const usernamedb = response.data[0].userName
+// const pwdb = response.data[0].password
+// console.log(usernamedb)
+// console.log(pwdb)
 
 
 const SignIn = () => {
