@@ -2,8 +2,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 const db = require('./db')
 const userRouter = require('./router/userRouter')
+
+
 
 //import Controllers
 const goalsController = require('./controllers/goalsController')
@@ -11,10 +15,11 @@ const userController = require('./controllers/userController')
 const milestoneController = require('./controllers/milestoneController')
 
 const app = express()
-//app.use('http://localhost:3001/',userRouter)
+app.use(express.json())
 app.use(cors())
 app.use(logger('dev'))
 app.use(bodyParser.json())
+
 const PORT = process.env.PORT || 3001
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
@@ -36,6 +41,12 @@ app.get('/milestones/:id', milestoneController.getMilestoneById)
 app.post('/goals', goalsController.createGoal)
 app.post('/users', userController.createUser)
 app.post('/milestones', milestoneController.createMilestone)
+// app.post('/users', (req, res) => {
+//     const {userName, password, email} = req.body
+//     User.create({userName, password, email})
+//     .then(user => res.json(user))
+//     .catch(err => res.json(err))
+// })
 
 app.put('/goals/:id', goalsController.updateGoal)
 app.put('/users/:id', userController.updateUser)
@@ -46,15 +57,3 @@ app.delete('/users/:id', userController.deleteUser)
 app.delete('/milestones/:id', milestoneController.deleteMilestone)
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
-
-
-//[[[[[[[[[[[[[[[[[[[[[[[ Denesh ]]]]]]]]]]]]]]]]]]]]]]]
-// app.post('/register', (req,res) => {
-//     db.query("INSERT INTO user (userName,password,email,firstName,lastName,DOB) VALUES (?,?,?,?,?,?)",
-//     [userName,password,email,firstName,lastName,DOB],
-//     (err,result) => {
-//         console.log(err)
-//     })
-// })
-
-///[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]

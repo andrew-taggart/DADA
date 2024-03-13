@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-
+import * as Realm from "realm-web"
 
 const Register = () => {
     const navigate = useNavigate();
@@ -18,7 +18,11 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Hi')
+        axios.post('http://localhost:3001/users', { userName: username, 
+        email: email, 
+        password: password })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
             return;
@@ -34,11 +38,9 @@ const Register = () => {
         // Assuming validation passes and the user does not exist,
         // proceed to registration logic here (e.g., sending data to your backend)
 
-
-
-        console.log('Registering:', username, email);
+        console.log('Registering:', username, email)
         // Navigate to a success page or login page after successful registration
-        navigate('/signin');
+        // navigate('/');
     };
 
     // Placeholder for a function that checks if the user already exists
@@ -55,6 +57,19 @@ const Register = () => {
         // This is a placeholder. You would typically check against your user database here.
         return false; // Assume user does not exist for demonstration
     };
+
+    // useEffect(async () => {
+    //     const REALM_APP_ID = "dadadata-vbyeg"
+    //     const app = new Realm.App({id: REALM_APP_ID})
+    //     const credentials = Realm.Credentials.anonymous()
+    //     try {
+    //         const user = await app.logIn(credentials)
+    //         const allUsers = await user.functions.getAllUsers()
+    //         console.log(allUsers)
+    //     } catch (error) {
+
+    //     }
+    // }, [])
 
     return (
         <div className="register-container">
