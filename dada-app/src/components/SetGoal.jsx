@@ -118,7 +118,13 @@ try{
 
     
     // Clear form fields
-    handelClearForm()
+    setUser('')
+    setGoalName('')
+    setDescription('')
+    setStartDate('')
+    setEndDate('')
+    setReminder(false)
+    setAccomplish(false)
 
     setAlertMessage('Goal and Milestones are successfully registered !')
   }
@@ -184,6 +190,7 @@ try{
           />
         </div>
         <div className="form-group">
+          
           <label htmlFor="endDate">End Date:</label>
           <input
             type="date"
@@ -197,6 +204,7 @@ try{
         
         
        <div className='checked-box'>
+       <button type="button" className="milestone_btn" id="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
        <div className="form-group">
           <label htmlFor="reminder">Reminder:</label>
           <input
@@ -223,7 +231,7 @@ try{
         </div>
         {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
         <div className="milebtn_div">
-          <button type="button" className="milestone_btn" id="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
+          {/* <button type="button" className="milestone_btn" id="btn-clear-register-goal" onClick={handelClearForm}>Clear</button> */}
           <button type="submit" className="milestone_btn" id="btn-new-register-goal">Register</button>
           {/* <button type="button" className="milestone_btn" id="btn-edit-register-goal">Modify</button>
           <button type="button" className="milestone_btn" id="btn-discard-register-goal">Discard</button> */}
