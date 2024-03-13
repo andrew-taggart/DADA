@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+
 
 const Register = () => {
     const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('Hi')
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
             return;
@@ -31,6 +34,8 @@ const Register = () => {
         // Assuming validation passes and the user does not exist,
         // proceed to registration logic here (e.g., sending data to your backend)
 
+
+
         console.log('Registering:', username, email);
         // Navigate to a success page or login page after successful registration
         navigate('/signin');
@@ -40,7 +45,13 @@ const Register = () => {
     // In a real application, replace this with a request to your backend API
     const checkUserExists = async (username, email) => {
         // Simulate an API call with a delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // await new Promise(resolve => setTimeout(resolve, 1000));
+        const respons = await axios.get(`http://localhost:3001/users`)
+        if(respons)
+        {
+            console.log("Users ",respons.data)
+            return true
+        }
         // This is a placeholder. You would typically check against your user database here.
         return false; // Assume user does not exist for demonstration
     };
