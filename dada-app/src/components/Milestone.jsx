@@ -1,7 +1,7 @@
 import React, { useState, useContext,useEffect } from 'react'
 
 
-export default function Milestone({ onAddMilestone, clearMilestones }) {
+export default function Milestone({ onAddMilestone }) {
 
 
 
@@ -11,7 +11,7 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
     const [activeReminder, setActiveReminder] = useState(false)
     const [description, setDescription] = useState('')
 
-    const [alertMessage, setAlertMessage] = useState('')
+    const [alertMessage, setAlertMessageM] = useState('')
     const [milestones, setMilestones] = useState([])
 
     const handleTaskNameChange = (e) => setTaskName(e.target.value)
@@ -20,13 +20,21 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
     const handleActiveReminderChange = (e) => setActiveReminder(e.target.checked)
     const handleAccomplishedChange = (e) => setAccomplished(e.target.checked)
 
-
+    const clearMilestones = () => {
+        setTaskName('')
+        setDueDate('')
+        setAccomplished(false)
+        setActiveReminder(false)
+        setDescription('')
+        setAlertMessageM('')
+        setMilestones([])
+    }
 
     const handelSubmit = (e) => {
         e.preventDefault()
         try {
             if (!taskName || !dueDate) {
-                setAlertMessage('Task name and due date are required.')
+                setAlertMessageM('Task name and due date are required.')
                 return
             }
             const newMilestone = {
@@ -38,14 +46,14 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
             //Passing set of Milestones into parent (Goal) components
             onAddMilestone(newMilestone)
 
+           
+            // setMilestones('')
             setTaskName('')
             setDueDate('')
             setAccomplished(false)
             setActiveReminder(false)
             setDescription('')
-            setAlertMessage('')
-            // setMilestones('')
-            // clearMilestones()
+            setAlertMessageM('')
 
         } catch (error) {
             // setAlertMessage('Unable to add milestone.', error.message)
@@ -114,7 +122,8 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
                             </div>
                         </div>
                         <div>
-                        {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
+                        <button type='button'className='clear-milestone' onClick={() => clearMilestones()}>Clear</button>
+                        {/* {alertMessage && <div className='alt-msg'>{alertMessage}</div>} */}
                     </div>
                     <table className='table-milestone'>
                         <thead>
@@ -145,9 +154,10 @@ export default function Milestone({ onAddMilestone, clearMilestones }) {
                         </tbody>
 
                     </table>
-                    {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
+                    
                 </div>
-
+                    {alertMessage && <div className='alt-msg'>{alertMessage}</div>}
+                    
                 {/* </form> */}
             </div>
         </>
