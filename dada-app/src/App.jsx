@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react'
+import { useState, useContext } from 'react'
 import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
@@ -7,17 +7,20 @@ import './index.css'
 
 //Importing context
 import GoalContextProvide from './context/GoalContext'
+import AuthContext from './context/AuthContext'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <GoalContextProvide>
-      <Header />
-      <Main />
-      <Footer />
-      </GoalContextProvide>
+      <AuthContext>
+        <GoalContextProvide>
+          <Header />
+          <Main />
+          <Footer />
+        </GoalContextProvide>
+      </AuthContext>
     </div>
   )
 }
