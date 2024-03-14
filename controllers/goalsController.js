@@ -1,7 +1,9 @@
 const { Goal } = require('../models')
 const getAllGoals = async (req, res) => {
     try {
-        const goal = await Goal.find()
+        const userId = req.query.userId
+        const query = userId ? { user: userId } : {}
+        const goal = await Goal.find(query)
         res.json(goal)
     } catch (error) {
         return res.status(500).send(error.message)
@@ -21,15 +23,27 @@ const getGoalById = async (req, res) => {
 }
 const createGoal = async (req, res) => {
     try {
-        console.log("Req body ",req.body)
-        const goal = await new Goal(req.body)
-        console.log("Before Save ",goal)
+        console.log("Req body ", req.body);
+        
+        // add validation to check for a user ID in the request body
+        if (!req.body.user) {
+            return res.status(400).json({ message: "User ID is required." })
+        }
+
+        // Explicitly constructing the goal object to include in the logs
+        const { user, goalName, startDate, endDate, accomplished, isActive, notes } = req.body
+        const goalData = { user, goalName, startDate, endDate, accomplished, isActive, notes }
+
+        console.log("Goal Data being saved: ", goalData)
+
+        // Creating the goal with structured data
+        const goal = new Goal(goalData)
         await goal.save()
-        return res.status(201).json({
-            goal
-        })
+
+        return res.status(201).json({ goal })
     } catch (error) {
-        return res.status(500).json({error: error.message})
+        console.error("Error creating goal: ", error)
+        return res.status(500).json({ error: error.message })
     }
 }
 

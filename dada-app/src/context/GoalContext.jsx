@@ -1,44 +1,39 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState, createContext } from 'react'
 import axios from 'axios'
-import { Await } from 'react-router-dom'
-export const GoalContext = React.createContext()
- 
 
-//Provider function
-const  GoalContextProvide = (props) => {
+export const GoalContext = createContext()
 
-    // Initilizing goals via context 
-    const [goals,setGoals] = useState({})
-   
-    const addNewGoal = async (user, goalName, startDate,endDate, accomplished,isActive,notes,milestones) => {
+const GoalContextProvider = (props) => {
+  const [goals, setGoals] = useState([]) // Initialize goals as an array
 
-    // setGoals({user, goalName, startDate, endDate, accomplished, isActive, notes, milestones })
+  const addNewGoal = async (user, goalName, startDate, endDate, accomplished, isActive, notes, milestones) => {
     const goalData = { user, goalName, startDate, endDate, accomplished, isActive, notes, milestones }
 
-    try{
-        // console.log('Before APi call' , goalData)
-        const response = await axios.post('http://localhost:3001/goals',goalData)
+    try {
+      const response = await axios.post('http://localhost:3001/goals', goalData)
 
-        if(response.data && response.data.goal._id) {
-            for (const milestone of milestones) {
-              
-              await axios.post('http://localhost:3001/milestones', { ...milestone, goal: response.data.goal._id });
-            }
-          }
-    }catch(error)
-    {
-        console.log('Unable to Creat Goals files',error)
+      if (response.data && response.data.goal) {
+        for (const milestone of milestones) {
+          await axios.post('http://localhost:3001/milestones', { ...milestone, goal: response.data.goal._id })
+        }
+        // Update the local goals state to reflect the newly added goal
+        setGoals(currentGoals => [...currentGoals, { ...response.data.goal, milestones }])
+      }
+    } catch (error) {
+      console.error('Unable to Create Goal', error)
+      throw error // Propagate error to be handled by caller
     }
-    }
+  }
 
-    return (
-        //  {/* //Passing the values of goals to its childrens (SetupGoals) */}
-        <GoalContext.Provider value={{goals,addNewGoal}}>           
-            {props.children}
-        </GoalContext.Provider>
-    )
+  return (
+    <GoalContext.Provider value={{ goals, addNewGoal }}>
+      {props.children}
+    </GoalContext.Provider>
+  )
 }
-export default GoalContextProvide
+
+export default GoalContextProvider
+
 
 // Reference
 

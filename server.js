@@ -31,6 +31,7 @@ app.get('/', (req, res) => res.send('welcome to our landing page!'))
 app.get('/goals', goalsController.getAllGoals)
 app.get('/users', userController.getAllUsers)
 app.get('/milestones', milestoneController.getAllMilestones)
+app.get('/milestones/goal/:goalId', milestoneController.getMilestonesByGoalId)
 app.get('/home', userController.verifyUser, (req, res) => {
     return res.json ({valid: true, message: "welcome back!"})
 })
