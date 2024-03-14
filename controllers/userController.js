@@ -81,7 +81,7 @@ const SigninUser = async (req, res) => {
             if(user) {
                 if(user.password === password) {
                     const accessToken = jwt.sign({username: userName}, "jwt-access-token-secret-key", {expiresIn: '1m'})
-                    const refreshToken = jwt.sign({username: userName}, "jwt-refresh-token-secret-key", {expiresIn: '2m'})
+                    const refreshToken = jwt.sign({username: userName}, "jwt-refresh-token-secret-key", {expiresIn: '12hr'})
 
                     res.cookie('accessToken', accessToken, {maxAge: 60000})
 
@@ -98,9 +98,6 @@ const SigninUser = async (req, res) => {
     }
 }
 
-// const authorizedUser = async (req, res) => {
-//     return res.json({valid: true, message: "welcome back!"})
-// }
 
 const verifyUser = (req, res, next) => {
     const accesstoken = req.cookies.accessToken
@@ -148,6 +145,5 @@ module.exports = {
     deleteUser,
     getUserByUsername,
     SigninUser,
-    // authorizedUser,
     verifyUser
 }
