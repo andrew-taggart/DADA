@@ -45,14 +45,15 @@ const Register = () => {
             setAlertMSGEmail("Please enter a valid email address.")
             return
         }
-
         if (password !== confirmPassword) {
             console.log("not match password")
             setAlertMSGPAssword("Passwords do not match.")            
             return
         }
 
-            axios.post('http://localhost:3001/users', { userName: username, 
+            axios.post('http://localhost:3001/users', 
+            {
+            userName: username, 
             email: email, 
             password: password })
             .then(
@@ -75,14 +76,14 @@ const Register = () => {
 
     const handelClearForm = () => {
 
-        if(alertMSGUser === "An account with this username already exists."){
+        if(alertMSGUser){
             setAlertMSGUser('')
             setUsername('')
             return
         } else if (alertMSGEmail){
             setAlertMSGEmail('')
             setEmail('')
-        } else if (alertMSGPassword ==="Passwords do not match."){
+        } else if (alertMSGPassword){
             setAlertMSGPAssword('')
             setConfirmPassword('')
         } else {
