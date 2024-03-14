@@ -204,7 +204,7 @@ try{
         
         
        <div className='checked-box'>
-       <button type="button" className="milestone_btn" id="btn-clear-register-goal" onClick={handelClearForm}>Clear</button>
+       <button type="button" className="milestone_btn" id="clear-btn" onClick={handelClearForm}>Clear</button>
        <div className="form-group">
           <label htmlFor="reminder">Reminder:</label>
           <input

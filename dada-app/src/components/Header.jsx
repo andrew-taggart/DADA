@@ -5,7 +5,6 @@ const Header = () => {
     return (
     <div className='head-container'>
         <h1><div className="target"><img src={target_icon} width="53px"></img></div> DADA GOAL </h1>
-        <div className="welcome"> welcome (username)</div>
         <Nav />
     </div>)
     }

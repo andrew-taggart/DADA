@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
 import './App.css'
+import './index.css'
 
 //Importing context
 import GoalContextProvide from './context/GoalContext'
