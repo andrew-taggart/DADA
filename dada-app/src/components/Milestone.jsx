@@ -102,8 +102,12 @@ export default function Milestone({ onAddMilestone }) {
                             />
                         </div>
                         <div className='checked-box'>
+                            <div>
+                                <button type='button'id="clear-btn" className='clear-milestone' onClick={() => clearMilestones()}>Clear</button>
+                                {/* {alertMessage && <div className='alt-msg'>{alertMessage}</div>} */}
+                            </div>
                             <div className="form-group">
-                                <label htmlFor="reminder">Active Reminder:</label>
+                                <label htmlFor="reminder">Reminder:</label>
                                 <input
                                     type="checkbox"
                                     id="activeReminder"
@@ -121,10 +125,6 @@ export default function Milestone({ onAddMilestone }) {
                                 />
                             </div>
                         </div>
-                        <div>
-                        <button type='button'className='clear-milestone' onClick={() => clearMilestones()}>Clear</button>
-                        {/* {alertMessage && <div className='alt-msg'>{alertMessage}</div>} */}
-                    </div>
                     <table className='table-milestone'>
                         <thead>
                             <tr>
