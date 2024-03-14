@@ -2,10 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const cors = require('cors')
-const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
 const db = require('./db')
-
+const cookieParser = require('cookie-parser')
 
 
 //import Controllers
@@ -15,7 +13,11 @@ const milestoneController = require('./controllers/milestoneController')
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cookieParser())
+app.use(cors({
+    origin: ['http://localhost:5173'],
+    credentials: true
+}))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
@@ -29,6 +31,9 @@ app.get('/', (req, res) => res.send('welcome to our landing page!'))
 app.get('/goals', goalsController.getAllGoals)
 app.get('/users', userController.getAllUsers)
 app.get('/milestones', milestoneController.getAllMilestones)
+app.get('/home', userController.verifyUser, (req, res) => {
+    return res.json ({valid: true, message: "welcome back!"})
+})
 // app.get('/goals/:name', goalsController.getAllGoals)
 
 app.get('/goals/:id', goalsController.getGoalById)
@@ -40,12 +45,8 @@ app.get('/milestones/:id', milestoneController.getMilestoneById)
 app.post('/goals', goalsController.createGoal)
 app.post('/users', userController.createUser)
 app.post('/milestones', milestoneController.createMilestone)
-// app.post('/users', (req, res) => {
-//     const {userName, password, email} = req.body
-//     User.create({userName, password, email})
-//     .then(user => res.json(user))
-//     .catch(err => res.json(err))
-// })
+app.post('/login', userController.SigninUser)
+
 
 app.put('/goals/:id', goalsController.updateGoal)
 app.put('/users/:id', userController.updateUser)

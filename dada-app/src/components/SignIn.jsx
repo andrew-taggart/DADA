@@ -2,16 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; // Import Link along with useNavigate
 import axios from 'axios'
 
-
-// const response = await axios.get(`http://localhost:3001/users/name/adminBan`)
-    // console.log(response.data)
-
-// const usernamedb = response.data[0].userName
-// const pwdb = response.data[0].password
-// console.log(usernamedb)
-// console.log(pwdb)
-
-
 const SignIn = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
@@ -25,17 +15,25 @@ const SignIn = () => {
         setPassword(e.target.value);
     };
 
-
+    axios.defaults.withCredentials = true
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (username == usernamedb && password == pwdb)
-            navigate('/home') 
-
-            else if (username !== usernamedb ||  password !== pwdb) 
-                {alert ('please enter a correct username or password')}; // Use navigate to redirect
-    };
-    
+        axios.post('http://localhost:3001/login', 
+        { userName: username, 
+            password: password }
+            )
+        .then(res => {
+            console.log(res)
+            if(res.data.Signin) {
+                navigate('/home')
+            } else {
+                navigate('/')
+            }
+        })
+        .catch(err => console.log(err)) 
+        }
+         // Use navigate to redirect
 
 
     return (

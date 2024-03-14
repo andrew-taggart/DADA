@@ -1,4 +1,7 @@
 const { User } = require('../models')
+const jwt = require('jsonwebtoken')
+
+
 const getAllUsers = async (req, res) => {
     try {
         const user = await User.find()
@@ -69,11 +72,78 @@ const deleteUser = async (req, res) => {
         return res.status(500).send(error.message)
     }
 }
+
+const SigninUser = async (req, res) => {
+    try {
+        let { userName, password } = req.body
+        await User.findOne( { userName } )
+        .then(user => {
+            if(user) {
+                if(user.password === password) {
+                    const accessToken = jwt.sign({username: userName}, "jwt-access-token-secret-key", {expiresIn: '1m'})
+                    const refreshToken = jwt.sign({username: userName}, "jwt-refresh-token-secret-key", {expiresIn: '12hr'})
+
+                    res.cookie('accessToken', accessToken, {maxAge: 60000})
+
+                    res.cookie('refreshToken', refreshToken, {maxAge: 120000, httpOnly: true, secure: true, sameSite: 'strict'})
+                    return res.json({Signin: true})
+                }
+            } else {
+                res.json({Signin: false, Message: "username doesn't exist. Please register."})
+            }
+        })
+        
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
+}
+
+
+const verifyUser = (req, res, next) => {
+    const accesstoken = req.cookies.accessToken
+    if(!accesstoken) {
+        if(renewToken(req, res)) {
+            next()
+        }
+    } else {
+        jwt.verify(accesstoken, 'jwt-access-token-secret-key', (err, decoded) => {
+            if(err) {
+                return res.json({valid: false, message: "Invalid Token"})
+            } else {
+                req.userName = decoded.userName
+                next()
+            }
+        })
+    }
+}
+
+const renewToken = (req, res) => {
+    const refreshtoken = req.cookies.refreshToken
+    let exist = false
+    if(!refreshtoken) {
+        return res.json({valid: false, message: "No Refresh token"})
+    } else {
+        jwt.verify(refreshtoken, 'jwt-refresh-token-secret-key', (err, decoded) => {
+            if(err) {
+                return res.json({valid: false, message: "Invalid Refresh Token"})
+            } else {
+                const accessToken = jwt.sign({username: decoded.userName}, "jwt-access-token-secret-key", {expiresIn: '1m'})
+                res.cookie('accessToken', accessToken, {maxAge: 60000})
+                exist = true
+            }
+        })
+    }
+    return exist
+}
+
+
 module.exports = {
     getAllUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser,
-    getUserByUsername
+    getUserByUsername,
+    SigninUser,
+    verifyUser
 }
