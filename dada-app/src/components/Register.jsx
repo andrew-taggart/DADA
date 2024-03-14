@@ -104,12 +104,14 @@ const Register = () => {
                 <div className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input type="text" id="username" value={username} onChange={handleUsernameChange} required />
-                        {alertMSGUser && <div className='alt-msg'>{alertMSGUser}</div>}
+                        
                     </div>
+                    <div>{alertMSGUser && <div className='alt-msg'>{alertMSGUser}</div>}</div>
                     <div className="form-group">
                         <label htmlFor="email">Email:</label>
                         <input type="email" id="email" value={email} onChange={handleEmailChange} required />
                     </div>
+                    <div>{alertMSGEmail && <div className='alt-msg'>{alertMSGEmail}</div>}</div>
                     <div className="form-group">
                         <label htmlFor="password">Password:</label>
                         <input type="password" className="password" value={password} onChange={handlePasswordChange} required />
@@ -118,6 +120,9 @@ const Register = () => {
                         <label htmlFor="confirmPassword" id='confirmpw'>Confirm PW:</label>
                         <input type="password" className="password" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                     </div>
+                    <div>{alertMSGPassword && <div className='alt-msg'>{alertMSGPassword}</div>}</div>
+                    <div>{alertMSGRegister && <div className='alt-msg'>{alertMSGRegister}</div>}</div>
+                    <button type="button" className="btn-clear" onClick={handelClearForm}>Clear</button>
                     <button type="submit" className="btn-register">Register</button>
                 </form>
             </div>
