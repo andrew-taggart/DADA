@@ -104,7 +104,7 @@ const Register = () => {
                 <div className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input type="text" id="username" value={username} onChange={handleUsernameChange} required />
-                        {alertUsername && <div className='alt-msg'>{alertUsername}</div>}
+                        {alertMSGUser && <div className='alt-msg'>{alertMSGUser}</div>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email:</label>
