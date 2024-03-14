@@ -3,7 +3,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
+
 export default function Calendar() {
+
+
   return (
     <div className="calendar-container">
     <FullCalendar
@@ -13,7 +16,7 @@ export default function Calendar() {
         start: "prev,next",
         center: "title",
         end: "dayGridMonth, timeGridWeek, timeGridDay"
-      }} height="520px"
+      }} height="520px"      
     />
     </div>
   )

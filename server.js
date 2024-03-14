@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const logger = require('morgan')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
+// const cookieParser = require('cookie-parser')
 const db = require('./db')
 const userRouter = require('./router/userRouter')
 

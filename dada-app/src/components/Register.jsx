@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import * as Realm from "realm-web"
+// import * as Realm from "realm-web"
 
 const Register = () => {
     const navigate = useNavigate();
@@ -9,7 +9,12 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState(''); // State to hold any registration error
+    const [error, setError] = useState(''); 
+
+    const [alertMSGUser, setAlertMSGUser] = useState('')
+    const [alertMSGEmail, setAlertMSGEmail] = useState('')
+    const [alertMSGPassword, setAlertMSGPAssword] = useState('')
+    const [alertMSGRegister, setAlertMSGRRegister] = useState('')
 
     const handleUsernameChange = (e) => setUsername(e.target.value);
     const handleEmailChange = (e) => setEmail(e.target.value);
@@ -17,73 +22,93 @@ const Register = () => {
     const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        axios.post('http://localhost:3001/users', { userName: username, 
-        email: email, 
-        password: password })
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err))
-        if (password !== confirmPassword) {
-            setError('Passwords do not match.');
-            return;
-        }
-
-        // Simulated function to check if the user already exists
-        const userExists = await checkUserExists(username, email);
-        if (userExists) {
-            setError('An account with this username or email already exists.');
-            return;
-        }
-
-        // Assuming validation passes and the user does not exist,
-        // proceed to registration logic here (e.g., sending data to your backend)
-
-        console.log('Registering:', username, email)
-        // Navigate to a success page or login page after successful registration
-        // navigate('/');
-    };
-
-    // Placeholder for a function that checks if the user already exists
-    // In a real application, replace this with a request to your backend API
-    const checkUserExists = async (username, email) => {
-        // Simulate an API call with a delay
-        // await new Promise(resolve => setTimeout(resolve, 1000));
+        try{
+        e.preventDefault();       
         const respons = await axios.get(`http://localhost:3001/users`)
         if(respons)
         {
-            console.log("Users ",respons.data)
-            return true
+            let listofUsers = respons.data
+            let isUSerExist = false
+            listofUsers.map((e) =>{
+                if(e.userName === username){
+                    setAlertMSGUser("An account with this username already exists.")
+                    isUSerExist = true
+                }else if (e.email === email){
+                    setAlertMSGEmail("An account with this email already exists.")
+                    isUSerExist = true
+                }
+            })
+            if(isUSerExist) return
         }
-        // This is a placeholder. You would typically check against your user database here.
-        return false; // Assume user does not exist for demonstration
-    };
+        const emailRegex = /\S+@\S+\.\S+/
+        if (!emailRegex.test(email)) {
+            setAlertMSGEmail("Please enter a valid email address.")
+            return
+        }
 
-    // useEffect(async () => {
-    //     const REALM_APP_ID = "dadadata-vbyeg"
-    //     const app = new Realm.App({id: REALM_APP_ID})
-    //     const credentials = Realm.Credentials.anonymous()
-    //     try {
-    //         const user = await app.logIn(credentials)
-    //         const allUsers = await user.functions.getAllUsers()
-    //         console.log(allUsers)
-    //     } catch (error) {
+        if (password !== confirmPassword) {
+            console.log("not match password")
+            setAlertMSGPAssword("Passwords do not match.")            
+            return
+        }
 
-    //     }
-    // }, [])
+            axios.post('http://localhost:3001/users', { userName: username, 
+            email: email, 
+            password: password })
+            .then(
+                res => console.log(res.data),
+                setAlertMSGRRegister("Sucesfully Registered"),
+                navigate('/home')
+                )
+            .catch(
+                error => console.log(error),
+                setAlertMSGRRegister("Unable to register :", error.message)
+                )
+        
+        
+       
+    }catch(error){
+        setAlertMSGRRegister("Registration error :", error.message)
+    }
+    }
+
+
+    const handelClearForm = () => {
+
+        if(alertMSGUser === "An account with this username already exists."){
+            setAlertMSGUser('')
+            setUsername('')
+            return
+        } else if (alertMSGEmail){
+            setAlertMSGEmail('')
+            setEmail('')
+        } else if (alertMSGPassword ==="Passwords do not match."){
+            setAlertMSGPAssword('')
+            setConfirmPassword('')
+        } else {
+            setUsername('')
+            setEmail('')
+            setPassword('')
+            setConfirmPassword('')
+            setAlertMSGRRegister('')
+        }
+    }
 
     return (
         <div className="register-container">
             <h2>Register</h2>
-            {error && <p className="error">{error}</p>} {/* Display any registration error */}
+            {/* {error && <p className="error">{error}</p>}  */}
             <form onSubmit={handleSubmit}>
             <div className="form-group">
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" value={username} onChange={handleUsernameChange} required />
-                </div>
+                </div>               
+                   <div>{alertMSGUser && <div className='alt-msg'>{alertMSGUser}</div>}</div>
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
                     <input type="email" id="email" value={email} onChange={handleEmailChange} required />
                 </div>
+                <div>{alertMSGEmail && <div className='alt-msg'>{alertMSGEmail}</div>}</div>
                 <div className="form-group">
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
@@ -92,8 +117,12 @@ const Register = () => {
                     <label htmlFor="confirmPassword">Confirm Password:</label>
                     <input type="password" id="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                 </div>
+                <div>{alertMSGPassword && <div className='alt-msg'>{alertMSGPassword}</div>}</div>
+                <div>{alertMSGRegister && <div className='alt-msg'>{alertMSGRegister}</div>}</div>
+                <button type="button" className="btn-clear" onClick={handelClearForm}>Clear</button>
                 <button type="submit" className="btn-register">Register</button>
             </form>
+            
         </div>
     );
 };
