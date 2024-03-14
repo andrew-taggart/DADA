@@ -11,6 +11,7 @@ const GoalDetails = () => {
         isActive: true,
         notes: '',
     })
+    const [milestones, setMilestones] = useState([])
     const [updateGoal, setUpdate] = useState(false)
     const [error, setError] = useState('')
     const { goalId } = useParams()
@@ -21,19 +22,30 @@ const GoalDetails = () => {
             console.log(goal)
             try {
                 const response = await axios.get(`http://localhost:3001/goals/${goalId}`)
-                setGoal({...response.data, startDate: response.data.startDate.slice(0,10), endDate: response.data.endDate.slice(0,10)})
+                setGoal({ ...response.data, startDate: response.data.startDate.slice(0, 10), endDate: response.data.endDate.slice(0, 10) })
             } catch (error) {
                 setError('Failed to fetch goal details')
                 console.error(error)
             }
         }
 
+        const fetchMilestones = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3001/milestones/goal/${goalId}`)
+                setMilestones(response.data)
+            } catch (error) {
+                setError('Failed to fetch milestones')
+                console.error(error)
+            }
+        }
+
         fetchGoalDetails()
+        fetchMilestones()
     }, [goalId])
 
     const inputChange = (e) => {
         const { name, value } = e.target
-        setGoal({ ...goal, [name]: value})
+        setGoal({ ...goal, [name]: value })
     }
     const toggleStatus = field => {
         setGoal({ ...goal, [field]: !goal[field] })
@@ -81,7 +93,21 @@ const GoalDetails = () => {
                     <button onClick={handleUpdateGoal}>Submit</button>
                 </div>
             )}
-
+<h3>Milestones</h3>
+                    {milestones.length > 0 ? (
+                        <ul>
+                            {milestones.map(milestone => (
+                                <li key={milestone._id}>
+                                    <p><strong>Task:</strong> {milestone.taskName}</p>
+                                    <p><strong>Due Date:</strong> {new Date(milestone.dueDate).toLocaleDateString()}</p>
+                                    <p><strong>Accomplished:</strong> {milestone.accomplished ? 'Yes' : 'No'}</p>
+                                    <p><strong>Description:</strong> {milestone.description}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No milestones found for this goal.</p>
+                    )}
         </div>
     )
 }

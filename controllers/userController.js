@@ -86,7 +86,9 @@ const SigninUser = async (req, res) => {
                     res.cookie('accessToken', accessToken, {maxAge: 60000})
 
                     res.cookie('refreshToken', refreshToken, {maxAge: 7200000, httpOnly: true, secure: true, sameSite: 'strict'})
-                    return res.json({Signin: true})
+                    return res.json({
+                        Signin: true,
+                        userId: user._id})
                 }
             } else {
                 res.json({Signin: false, Message: "username doesn't exist. Please register."})

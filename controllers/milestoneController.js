@@ -54,12 +54,25 @@ const deleteMilestone = async (req, res) => {
         return res.status(500).send(error.message)
     }
 }
+
+const getMilestonesByGoalId = async (req, res) => {
+    try {
+        const { goalId } = req.params
+        const milestones = await Milestone.find({ goal: goalId })
+        res.json(milestones)
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
+
+
 module.exports = {
     getAllMilestones,
     getMilestoneById,
     createMilestone,
     updateMilestone,
     deleteMilestone,
+    getMilestonesByGoalId
 }
 
 

@@ -27,6 +27,7 @@ const SignIn = () => {
         .then(res => {
             console.log(res.data._id)
             if(res.data.Signin) {
+                localStorage.setItem('userId', res.data.userId)
                 navigate('/home')
             } else {
                 navigate('/')
