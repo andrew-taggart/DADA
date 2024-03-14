@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import deleteicon from '../assets/delete-icon.png'
+
 
 const Goals = () => {
   const [goals, setGoals] = useState([])
@@ -44,17 +46,21 @@ const Goals = () => {
   }
 
   return (
-    <div className='home-container'>
+    <div className='goal-container'>
       <h2>Manage Goals</h2>
       {error && <p className="error">{error}</p>}
-      <ul>
-        {goals.map((goal) => (
-          <li key={goal._id}>
-            <button onClick={() => handleSelectGoal(goal._id)}>{goal.goalName}</button>
-            <button onClick={() => handleDeleteGoal(goal._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <div className='list-container'>
+        <ul> 
+          {goals.map((goal) => (
+            <li key={goal._id}>
+              <div className='list-items'>
+              <button onClick={() => handleSelectGoal(goal._id)}>{goal.goalName}</button>
+              <button onClick={() => handleDeleteGoal(goal._id)}><img src ={deleteicon} width='22px;'></img></button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }

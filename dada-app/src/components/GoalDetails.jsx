@@ -53,10 +53,10 @@ const GoalDetails = () => {
     if (!goal) return <p>Loading...</p>
 
     return (
-        <div className='home-container'>
+        <div className='goal-detail-container'>
             <h2>Goal Details</h2>
             {!updateGoal ? (
-                <div>
+                <div className='detail-container'>
                     {/* Display mode */}
                     <p><strong>Name:</strong> {goal.goalName}</p>
                     <p><strong>Start Date:</strong> {new Date(goal.startDate).toLocaleDateString()}</p>
@@ -64,13 +64,15 @@ const GoalDetails = () => {
                     <p><strong>Accomplished:</strong> {goal.accomplished ? 'Yes' : 'No'}</p>
                     <p><strong>Active:</strong> {goal.isActive ? 'Yes' : 'No'}</p>
                     <p><strong>Notes:</strong> {goal.notes}</p>
-                    <button onClick={() => setUpdate(true)}>Update</button>
+                    <button onClick={() => setUpdate(true)} id='update-btn'>Update</button>
                     {/* Expand code to specify user */}
                 </div>
             ) : (
-                <div>
+                <div className='detail-container'>
                     {/* Update mode */}
-                    <input type="text" name="goalName" value={goal.goalName} onChange={inputChange} />
+                    <div>
+                        <input type="text" name="goalName" value={goal.goalName} onChange={inputChange} />
+                    </div>
                     <input type="date" name="startDate" value={goal.startDate} onChange={inputChange} />
                     <input type="date" name="endDate" value={goal.endDate} onChange={inputChange} />
                     <input type="text" name="notes" value={goal.notes} onChange={inputChange} />

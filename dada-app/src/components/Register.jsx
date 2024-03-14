@@ -112,11 +112,11 @@ const Register = () => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
+                        <input type="password" className="password" value={password} onChange={handlePasswordChange} required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmPassword" id='confirmpw'>Confirm PW:</label>
-                        <input type="password" id="password" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
+                        <input type="password" className="password" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                     </div>
                     <button type="submit" className="btn-register">Register</button>
                 </form>
