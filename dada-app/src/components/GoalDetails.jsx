@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Nav from './Nav'
 
 const GoalDetails = () => {
     const [goal, setGoal] = useState({
@@ -54,6 +55,7 @@ const GoalDetails = () => {
 
     return (
         <div className='goal-detail-container'>
+            <Nav/>
             <h2>Goal Details</h2>
             {!updateGoal ? (
                 <div className='detail-container'>
@@ -66,6 +68,7 @@ const GoalDetails = () => {
                     <p><strong>Notes:</strong> {goal.notes}</p>
                     <button onClick={() => setUpdate(true)} id='update-btn'>Update</button>
                     {/* Expand code to specify user */}
+                    <button onClick ={() => (navigate('/calendar'))}id='calendar'>Calendar</button>
                 </div>
             ) : (
                 <div className='detail-container'>

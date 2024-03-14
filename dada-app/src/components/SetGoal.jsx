@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { GoalContext } from '../context/GoalContext'
 import Milestone from './Milestone'
 import axios from 'axios'
+import Nav from './Nav'
 
 
 
@@ -154,6 +155,7 @@ try{
   console.log( "Goals" ,goals)
   return (
     <div className="goal-registration-container">
+      <Nav/>
       <div className="form-container">
       <form onSubmit={handleSubmit} className="setgoal_form">
         <div className='goal-title'>Register New Goal</div>

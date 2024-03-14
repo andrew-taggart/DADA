@@ -81,11 +81,11 @@ const SigninUser = async (req, res) => {
             if(user) {
                 if(user.password === password) {
                     const accessToken = jwt.sign({username: userName}, "jwt-access-token-secret-key", {expiresIn: '1m'})
-                    const refreshToken = jwt.sign({username: userName}, "jwt-refresh-token-secret-key", {expiresIn: '120m'})
+                    const refreshToken = jwt.sign({username: userName}, "jwt-refresh-token-secret-key", {expiresIn: '2m'})
 
                     res.cookie('accessToken', accessToken, {maxAge: 60000})
 
-                    res.cookie('refreshToken', refreshToken, {maxAge: 7200000, httpOnly: true, secure: true, sameSite: 'strict'})
+                    res.cookie('refreshToken', refreshToken, {maxAge: 120000, httpOnly: true, secure: true, sameSite: 'strict'})
                     return res.json({Signin: true})
                 }
             } else {

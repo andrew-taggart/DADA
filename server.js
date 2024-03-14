@@ -32,7 +32,7 @@ app.get('/goals', goalsController.getAllGoals)
 app.get('/users', userController.getAllUsers)
 app.get('/milestones', milestoneController.getAllMilestones)
 app.get('/home', userController.verifyUser, (req, res) => {
-    return res.json ({valid: true, message: "welcome back!"})
+    return res.json ({valid: true, message: "Welcome back!"})
 })
 // app.get('/goals/:name', goalsController.getAllGoals)
 

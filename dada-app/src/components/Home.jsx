@@ -1,6 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Nav from './Nav'
+import home from '../assets/home-icon.png'
+import setgoal from '../assets/setgoal-icon.png'
+import goal from '../assets/goal-icon.png'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -19,20 +23,17 @@ const Home = () => {
         .catch(err => console.log(err))
     },[])
 
-    const handleSignOut = () => {
-        // Perform sign-out operations here
-        // For example, clear user session data or tokens
-        
-        // Redirect to sign-in page
-        navigate('/');
-    };
 
     return (
 
         <div className="home">
-            <div><h5>{message}</h5>
-            <p>You have successfully signed in. Enjoy your stay.</p>
-            <button onClick={handleSignOut} className="btn-signout">Sign Out</button></div>
+            <Nav />
+            <div className='menu-container'>
+                <h5>{message}</h5>
+                <div className='firstrow'><img src = {home} width="50px"></img><p>HOME</p></div>
+                <div className='secondrow'><img src = {setgoal} width="50px"></img>
+                    <img src = {goal} width="50px"></img></div>
+            </div>
         </div>
     );
 };
