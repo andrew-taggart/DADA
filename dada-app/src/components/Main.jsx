@@ -21,7 +21,6 @@ const Main = () => {
             <Route path="/setgoal" element={<GoalForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/calendar" element={<Calendar />} />
-            <Route path='/goals/:goalId' element={<GoalDetails />} />
         </Routes>
         </div>
     )
