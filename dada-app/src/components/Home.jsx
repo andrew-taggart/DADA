@@ -28,11 +28,18 @@ const Home = () => {
 
         <div className="home">
             <Nav />
+            <h4>{message}</h4>
             <div className='menu-container'>
-                <h5>{message}</h5>
-                <div className='firstrow'><img src = {home} width="50px"></img><p>HOME</p></div>
-                <div className='secondrow'><img src = {setgoal} width="50px"></img>
-                    <img src = {goal} width="50px"></img></div>
+                <div className='icon-container'>
+                    <div className='icon-card'>
+                        <img src = {setgoal} onClick={()=> navigate('/setGoal')} width="60px" height='60px'></img>
+                        <p>Set Goal</p>
+                    </div>
+                    <div className='icon-card'>
+                    <img src = {goal} onClick={()=> navigate('/goals')} width="60px" height='60px'></img>
+                    <p>My Goals</p>
+                    </div>
+                </div>
             </div>
         </div>
     );

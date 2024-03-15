@@ -9,6 +9,7 @@ const getAllGoals = async (req, res) => {
         return res.status(500).send(error.message)
     }
 }
+
 const getGoalById = async (req, res) => {
     try {
         const { id } = req.params

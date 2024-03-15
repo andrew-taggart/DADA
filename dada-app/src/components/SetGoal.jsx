@@ -106,7 +106,7 @@ const GoalForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Description:</label>
+            <label htmlFor="description">Notes: </label>
             <textarea
               id="notes"
               value={notes}
@@ -140,6 +140,7 @@ const GoalForm = () => {
           </div>
 
           <div className='checked-box'>
+            <button type="button" className="clear-btn" onClick={clearForm}>Clear</button>
             <div className="form-group">
               <label htmlFor="reminder">Reminder:</label>
               <input
@@ -169,9 +170,8 @@ const GoalForm = () => {
 
           {alertMessage && <div className='alert-message'>{alertMessage}</div>}
 
-          <div className="form-action-buttons">
-            <button type="button" className="form-btn clear" onClick={clearForm}>Clear</button>
-            <button type="submit" className="form-btn submit">Register</button>
+          <div className='reg-btn'>
+            <button type="submit" className="register-btn">Register</button>
           </div>
         </form>
       </div>

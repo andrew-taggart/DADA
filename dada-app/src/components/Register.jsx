@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-// import * as Realm from "realm-web"
+import arrow from '../assets/back-arrow.png'
 
 const Register = () => {
     const navigate = useNavigate();
@@ -97,6 +97,7 @@ const Register = () => {
 
     return (
         <div className="register-container">
+            <button onClick={()=> (navigate ('/'))} className='goback'><img src= {arrow} width='20'></img>Go Back</button>
             <div className='register-background'>
                 {error && <p className="error">{error}</p>} {/* Display any registration error */}
                 <form className='register-form' onSubmit={handleSubmit}>
@@ -123,7 +124,8 @@ const Register = () => {
                     <div>{alertMSGPassword && <div className='alt-msg'>{alertMSGPassword}</div>}</div>
                     <div>{alertMSGRegister && <div className='alt-msg'>{alertMSGRegister}</div>}</div>
                     <button type="button" className="btn-clear" onClick={handelClearForm}>Clear</button>
-                    <button type="submit" className="btn-register">Register</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" >Register</button>
                 </form>
             </div>
         </div>

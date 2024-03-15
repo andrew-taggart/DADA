@@ -26,16 +26,15 @@ useEffect(() => {
 
   return (
     <div className="calendar-container">
-    <FullCalendar
-      plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
-      initialView="dayGridMonth" 
-      headerToolbar = {{
-        start: "prev,next",
-        center: "title",
-        end: "dayGridMonth, timeGridWeek, timeGridDay"
-      }} height="520px"
-      events={events}
-    />
+      <FullCalendar
+        plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
+        initialView="dayGridMonth" 
+        footerToolbar = {{
+          center: "dayGridMonth, timeGridWeek, timeGridDay"
+        }} 
+        height="520px"
+        events={events}
+      />
     </div>
   )
 }
