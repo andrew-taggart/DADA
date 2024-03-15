@@ -139,6 +139,10 @@ const renewToken = (req, res) => {
     return exist
 }
 
+const SignoutUser = (req, res) => {
+    res.cookie('refreshToken', '', {maxAge: 1})
+}
+
 
 module.exports = {
     getAllUsers,
@@ -148,5 +152,6 @@ module.exports = {
     deleteUser,
     getUserByUsername,
     SigninUser,
-    verifyUser
+    verifyUser,
+    SignoutUser
 }

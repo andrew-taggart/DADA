@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom'
-import jwt from 'jsonwebtoken'
 
 const Nav = () => {
 
-    const removeToken = (userToken) => {
         
-    }
+    
     return (
         <div className='nav-container'>
             <Link to="/home"> Home </Link>
