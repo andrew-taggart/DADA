@@ -1,0 +1,33 @@
+{
+  "name": "dada",
+  "version": "1.0.0",
+  "description": "##About This full-stack (Mongoose/Express/React/Node) application designed to help users set, track, and achieve their personal and professional goals. With a user-friendly interface and a wide range of customizable features, that will make it easy for users to stay motivated and focused on their path to success.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fullcalendar/core": "^6.1.11",
+    "@fullcalendar/daygrid": "^6.1.11",
+    "@fullcalendar/react": "^6.1.11",
+    "axios": "^1.6.7",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.1",
+    "mongosh": "^0.0.1",
+    "morgan": "^1.10.0",
+    "realm-web": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
