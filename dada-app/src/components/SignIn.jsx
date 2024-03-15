@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Import Link along with useNavigate
+import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
+
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const SignIn = () => {
             password: password }
             )
         .then(res => {
-            console.log(res)
+            console.log(res.data._id)
             if(res.data.Signin) {
                 localStorage.setItem('userId', res.data.userId)
                 navigate('/home')

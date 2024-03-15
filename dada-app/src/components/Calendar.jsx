@@ -8,7 +8,8 @@ import axios from 'axios'
 export default function Calendar() {
 const [events, setEvents] = useState([])
 useEffect(() => {
-  fetch('http://localhost:3001/goals')
+  const userId = localStorage.getItem('userId')
+  fetch(`http://localhost:3001/goals?userId=${userId}`)
     .then(response => response.json())
     .then(data => {
       const formattedEvents = data.map(item => ({
