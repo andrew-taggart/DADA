@@ -1,7 +1,7 @@
 # DADA
 
-##About
-This full-stack (Mongoose/Express/React/Node) application designed to help users set, track, and achieve their personal and professional goals. With a user-friendly interface and a wide range of customizable features, that will make it easy for users to stay motivated and focused on their path to success.
+## About
+This full-stack MERN (Mongoose/Express/React/Node) application is designed to help users set, track, and achieve their personal and professional goals. With a user-friendly interface and a wide range of customizable features, that will make it easy for users to stay motivated and focused on their path to success.
 
 ## Key Features
 
@@ -23,8 +23,8 @@ This full-stack (Mongoose/Express/React/Node) application designed to help users
 
 ![image](https://github.com/andrew-taggart/DADA/assets/156398347/22fc2616-9233-4531-85fb-3606ad8b6f00)
 
-##Developers
-- **Amid Martinez
-- **Daisy Ban
-- **Denesh Anandathasan
-- **Andrew Taggart
+## Developers
+- **Amid Martinez:** amidmartinez
+- **Daisy Ban:** toddlf705
+- **Denesh Anandathasan:** DeneshA
+- **Andrew Taggart:** andrew-taggart
