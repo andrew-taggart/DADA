@@ -15,9 +15,9 @@ const Goals = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/goals')
+        const userId = localStorage.getItem('userId')
+        const response = await axios.get(`http://localhost:3001/goals?userId=${userId}`)
         setGoals(response.data)
-        console.log(response)
       } catch (error) {
         setError('Failed to fetch goals')
         console.error(error)
