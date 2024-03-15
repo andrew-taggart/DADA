@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Nav from './Nav'
+import arrow from '../assets/back-arrow.png'
 
 const GoalDetails = () => {
     const [goal, setGoal] = useState({
@@ -66,48 +68,86 @@ const GoalDetails = () => {
 
     return (
         <div className='goal-detail-container'>
-            <h2>Goal Details</h2>
+            <Nav/>
             {!updateGoal ? (
+                <div>
+                    <button onClick={()=> (navigate ('/goals'))} className='goback'><img src= {arrow} width='20'></img>Go Back</button>
+                    <h2>Goal Details</h2>
                 <div className='detail-container'>
                     {/* Display mode */}
-                    <p><strong>Name:</strong> {goal.goalName}</p>
-                    <p><strong>Start Date:</strong> {new Date(goal.startDate).toLocaleDateString()}</p>
-                    <p><strong>End Date:</strong> {new Date(goal.endDate).toLocaleDateString()}</p>
-                    <p><strong>Accomplished:</strong> {goal.accomplished ? 'Yes' : 'No'}</p>
-                    <p><strong>Active:</strong> {goal.isActive ? 'Yes' : 'No'}</p>
-                    <p><strong>Notes:</strong> {goal.notes}</p>
-                    <button onClick={() => setUpdate(true)} id='update-btn'>Update</button>
-                    {/* Expand code to specify user */}
-                </div>
-            ) : (
-                <div className='detail-container'>
-                    {/* Update mode */}
-                    <div>
-                        <input type="text" name="goalName" value={goal.goalName} onChange={inputChange} />
-                    </div>
-                    <input type="date" name="startDate" value={goal.startDate} onChange={inputChange} />
-                    <input type="date" name="endDate" value={goal.endDate} onChange={inputChange} />
-                    <input type="text" name="notes" value={goal.notes} onChange={inputChange} />
-                    <button onClick={() => toggleStatus('accomplished')}>{goal.accomplished ? 'Not Accomplished' : 'Accomplished'}</button>
-                    <button onClick={() => toggleStatus('isActive')}>{goal.isActive ? 'Deactivate' : 'Activate'}</button>
-                    <button onClick={handleUpdateGoal}>Submit</button>
-                </div>
-            )}
-<h3>Milestones</h3>
+                    <table>
+                        <tr>
+                            <td><strong>Name:</strong> {goal.goalName}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Start Date:</strong> {new Date(goal.startDate).toLocaleDateString()}</td>
+                            <td><strong>Accomplished:</strong> {goal.accomplished ? 'Yes' : 'No'}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>End Date:</strong> {new Date(goal.endDate).toLocaleDateString()}</td>
+                            <td><strong>Active:</strong> {goal.isActive ? 'Yes' : 'No'}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Notes:</strong> {goal.notes}</td>
+                        </tr>
+                    </table>
+                    <h4>Milestones</h4>
                     {milestones.length > 0 ? (
-                        <ul>
+                        <div>
                             {milestones.map(milestone => (
-                                <li key={milestone._id}>
-                                    <p><strong>Task:</strong> {milestone.taskName}</p>
-                                    <p><strong>Due Date:</strong> {new Date(milestone.dueDate).toLocaleDateString()}</p>
-                                    <p><strong>Accomplished:</strong> {milestone.accomplished ? 'Yes' : 'No'}</p>
-                                    <p><strong>Description:</strong> {milestone.description}</p>
-                                </li>
+                                <table key={milestone._id}>
+                                    <tr>
+                                        <td><strong>Task:</strong> {milestone.taskName}</td>
+                                        <td><strong>Due Date:</strong> {new Date(milestone.dueDate).toLocaleDateString()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Description:</strong> {milestone.description}</td>
+                                        <td><strong>Accomplished:</strong> {milestone.accomplished ? 'Yes' : 'No'}</td>
+                                    </tr>
+                                </table>
                             ))}
-                        </ul>
+                        </div>
                     ) : (
                         <p>No milestones found for this goal.</p>
                     )}
+                        <button onClick={() => setUpdate(true)} id='update-btn'>Update</button>
+                        {/* Expand code to specify user */}
+                        <button onClick ={() => (navigate('/calendar'))}id='calendar'>Calendar</button>
+                </div>
+                </div>
+            ) : (
+                <div>
+                    <button onClick={()=> history.back()} className='goback'><img src= {arrow} width='20'></img>Go Back</button>
+                    <h2>Goal Detail Update</h2>
+                <div className='update-container'>
+                    {/* Update mode */}
+                    <div>
+                        <label>Goal Name: </label>
+                        <input type="text" name="goalName" value={goal.goalName} onChange={inputChange} />
+                    </div>
+                    <div>
+                        <label>Start Date: </label>
+                        <input type="date" name="startDate" value={goal.startDate} onChange={inputChange} />
+                    </div>
+                    <div>
+                        <label>End Date: </label>
+                        <input type="date" name="endDate" value={goal.endDate} onChange={inputChange} />
+                    </div>
+                    <div>
+                        <label>Notes: </label>
+                        <input type="text" name="notes" value={goal.notes} onChange={inputChange} />
+                    </div>
+                    <div>
+                        <label>Click to change status: </label>
+                        <div className='update-btns-spacing'>
+                        <button onClick={() => toggleStatus('accomplished')} className='status-btn'>{goal.accomplished ? 'Not Accomplished' : 'Accomplished'}</button>
+                        <button onClick={() => toggleStatus('isActive')}className='status-btn'>{goal.isActive ? 'Deactivate' : 'Activate'}</button>
+                        </div>
+                    </div>
+                    <button onClick={handleUpdateGoal} className='update-submit'>Submit</button>
+                </div>
+                </div>
+            )}
         </div>
     )
 }

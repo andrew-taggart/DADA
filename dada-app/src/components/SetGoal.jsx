@@ -1,6 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { GoalContext } from '../context/GoalContext'
 import Milestone from './Milestone'
+import axios from 'axios'
+import Nav from './Nav'
+
+
 
 const GoalForm = () => {
   const { addNewGoal } = useContext(GoalContext)
@@ -84,6 +88,7 @@ const GoalForm = () => {
 
   return (
     <div className="goal-registration-container">
+      <Nav/>
       <div className="form-container">
         <form onSubmit={handleSubmit} className="setgoal_form">
           <div className='goal-title'>Register New Goal</div>
@@ -101,7 +106,7 @@ const GoalForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Description:</label>
+            <label htmlFor="description">Notes: </label>
             <textarea
               id="notes"
               value={notes}
@@ -135,6 +140,7 @@ const GoalForm = () => {
           </div>
 
           <div className='checked-box'>
+            <button type="button" className="clear-btn" onClick={clearForm}>Clear</button>
             <div className="form-group">
               <label htmlFor="reminder">Reminder:</label>
               <input
@@ -164,9 +170,8 @@ const GoalForm = () => {
 
           {alertMessage && <div className='alert-message'>{alertMessage}</div>}
 
-          <div className="form-action-buttons">
-            <button type="button" className="form-btn clear" onClick={clearForm}>Clear</button>
-            <button type="submit" className="form-btn submit">Register</button>
+          <div className='reg-btn'>
+            <button type="submit" className="register-btn">Register</button>
           </div>
         </form>
       </div>

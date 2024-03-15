@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import deleteicon from '../assets/delete-icon.png'
+import Nav from './Nav'
 
 
 const Goals = () => {
@@ -47,6 +48,7 @@ const Goals = () => {
 
   return (
     <div className='goal-container'>
+      <Nav/>
       <h2>Manage Goals</h2>
       {error && <p className="error">{error}</p>}
       <div className='list-container'>

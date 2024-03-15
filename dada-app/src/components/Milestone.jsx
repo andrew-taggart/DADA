@@ -103,7 +103,7 @@ export default function Milestone({ onAddMilestone }) {
                         </div>
                         <div className='checked-box'>
                             <div>
-                                <button type='button'id="clear-btn" className='clear-milestone' onClick={() => clearMilestones()}>Clear</button>
+                                <button type='button' className='clear-btn' onClick={() => clearMilestones()}>Clear</button>
                                 {/* {alertMessage && <div className='alt-msg'>{alertMessage}</div>} */}
                             </div>
                             <div className="form-group">
